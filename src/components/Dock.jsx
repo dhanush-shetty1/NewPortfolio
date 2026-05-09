@@ -2,9 +2,11 @@ import { dockApps } from '#constants'
 import { useGSAP } from '@gsap/react'
 import React, { useRef, useState } from 'react'
 import gsap from 'gsap'
+import useWindowStore from '#store/window'
 
 const Dock = () => {
   const dockRef = useRef(null)
+  const {openWindow, closeWindow, windows}=useWindowStore();
 
   const [tooltip, setTooltip] = useState({
     visible: false,
@@ -59,8 +61,23 @@ const Dock = () => {
     }
   }, [])
 
-  const toggleApp = ({ id, canOpen }) => {
-    console.log(id, canOpen)
+  const toggleApp = (app) => {
+    if(!app.canOpen)return;
+
+    const window=windows[app.id];
+    if(window.isOpen){
+      closeWindow(app.id);
+    }
+    else{
+      openWindow(app.id);
+    }
+    console.log(windows);
+    
+  }
+
+  const getIconSrc = (icon) => {
+    const ext = icon.split('.').pop().toLowerCase()
+    return ext === 'svg' ? `/icons/${icon}` : `/images/${icon}`
   }
 
   return (
@@ -78,9 +95,10 @@ const Dock = () => {
               onClick={() => toggleApp({ id, canOpen })}
             >
               <img
-                src={`/images/${icon}`}
+                src={getIconSrc(icon)}
                 alt={name}
                 loading="lazy"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                 className={!canOpen ? 'opacity-60' : ''}
               />
             </button>

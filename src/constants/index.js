@@ -38,13 +38,13 @@ const navIcons = [
 const dockApps = [
   {
     id: "finder",
-    name: "Portfolio", // was "Finder"
+    name: "About Me", // was "Finder"
     icon: "finder.png",
     canOpen: true,
   },
   {
     id: "safari",
-    name: "Articles", // was "Safari"
+    name: "Safari", // was "Safari"
     icon: "safari.png",
     canOpen: true,
   },
@@ -67,11 +67,18 @@ const dockApps = [
     canOpen: true,
   },
   {
-    id: "trash",
-    name: "Archive", // was "Trash"
-    icon: "trash.png",
-    canOpen: false,
+    id: "github",
+    name: "Github", // was "Trash"
+    icon: "github2.png",
+    canOpen: true,
   },
+  {
+    id: "spotify",
+    name: "Spotify", // was "Trash"
+    icon: "spotify.png",
+    canOpen: true,
+  },
+  
 ];
 
 const blogPosts = [
@@ -501,6 +508,8 @@ const WINDOW_CONFIG = {
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  github: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },    
+  spotify: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
