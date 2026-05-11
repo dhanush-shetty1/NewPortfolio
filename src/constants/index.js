@@ -38,7 +38,7 @@ const navIcons = [
 const dockApps = [
   {
     id: "finder",
-    name: "About Me", // was "Finder"
+    name: "My Stuff", // was "Finder"
     icon: "finder.png",
     canOpen: true,
   },
@@ -67,9 +67,9 @@ const dockApps = [
     canOpen: true,
   },
   {
-    id: "github",
-    name: "Github", // was "Trash"
-    icon: "github2.png",
+    id: "typora",
+    name: "Typora", // was "Trash"
+    icon: "typora.png",
     canOpen: true,
   },
   {
@@ -212,6 +212,117 @@ const socials = [
   },
 ];
 
+const safariSocialLinks = [
+  {
+    id: 1,
+    name: "Email",
+    color: "#E74C3C",
+    letter: "✉",
+    link: "mailto:your-email@example.com",
+  },
+  {
+    id: 2,
+    name: "GitHub",
+    color: "#1B1B1B",
+    letter: "⚙",
+    link: "https://github.com",
+  },
+  {
+    id: 3,
+    name: "LinkedIn",
+    color: "#0077B5",
+    letter: "in",
+    link: "https://linkedin.com",
+  },
+  {
+    id: 4,
+    name: "Twitter",
+    color: "#1DA1F2",
+    letter: "𝕏",
+    link: "https://twitter.com",
+  },
+  {
+    id: 5,
+    name: "Instagram",
+    color: "#E4405F",
+    letter: "📷",
+    link: "https://instagram.com",
+  },
+];
+
+const safariCodingLinks = [
+  {
+    id: 1,
+    name: "LeetCode",
+    color: "#FFA500",
+    letter: "LC",
+    link: "https://leetcode.com",
+  },
+  {
+    id: 2,
+    name: "GitHub",
+    color: "#1B1B1B",
+    letter: "GH",
+    link: "https://github.com",
+  },
+  {
+    id: 3,
+    name: "GeeksforGeeks",
+    color: "#2F8D46",
+    letter: "GG",
+    link: "https://geeksforgeeks.org",
+  },
+  {
+    id: 4,
+    name: "Codolio",
+    color: "#667EEA",
+    letter: "CD",
+    link: "https://codolio.com",
+  },
+  {
+    id: 5,
+    name: "HackerRank",
+    color: "#00EA64",
+    letter: "HR",
+    link: "https://hackerrank.com",
+  },
+  {
+    id: 6,
+    name: "CodeChef",
+    color: "#5B4A8F",
+    letter: "CC",
+    link: "https://codechef.com",
+  },
+  {
+    id: 7,
+    name: "CodeForces",
+    color: "#1F8ACB",
+    letter: "CF",
+    link: "https://codeforces.com",
+  },
+];
+
+const safariNews = [
+  {
+    id: 1,
+    title: "JavaScript Continues Dominance in Web Development",
+    source: "Tech Weekly",
+    date: "May 10, 2026",
+  },
+  {
+    id: 2,
+    title: "React 19 Released with Major Performance Improvements",
+    source: "Dev News",
+    date: "May 8, 2026",
+  },
+  {
+    id: 3,
+    title: "AI-Powered Code Generation Tools Transform Development Workflow",
+    source: "Coding Today",
+    date: "May 5, 2026",
+  },
+];
+
 const photosLinks = [
   {
     id: 1,
@@ -259,6 +370,108 @@ const gallery = [
   },
 ];
 
+const typoraNotes = [
+  {
+    id: 1,
+    title: "Project Ideas",
+    preview: "Collection of innovative project ideas for personal portfolio development...",
+    lastEdited: "May 10, 2026",
+    content: [
+      {
+        type: "heading",
+        text: "Project Ideas for 2026",
+      },
+      {
+        type: "subheading",
+        text: "Web Applications",
+      },
+      {
+        type: "list",
+        items: [
+          "AI-powered Task Management App with real-time collaboration",
+          "Interactive Data Visualization Dashboard using D3.js",
+          "Progressive Web App for Offline Note-taking",
+          "Real-time Chat Application with WebSocket",
+        ],
+      },
+      {
+        type: "subheading",
+        text: "Portfolio Enhancements",
+      },
+      {
+        type: "text",
+        text: "Focus on building projects that showcase modern web technologies including React, Next.js, and blockchain integration. Document the development process and create detailed case studies for each project.",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Learning Resources",
+    preview: "Curated list of books, courses, and documentation for skill improvement...",
+    lastEdited: "May 8, 2026",
+    content: [
+      {
+        type: "heading",
+        text: "Learning Resources",
+      },
+      {
+        type: "subheading",
+        text: "Recommended Books",
+      },
+      {
+        type: "list",
+        items: [
+          "Clean Code by Robert C. Martin",
+          "Design Patterns by Gang of Four",
+          "You Don't Know JS by Kyle Simpson",
+          "The Pragmatic Programmer",
+        ],
+      },
+      {
+        type: "subheading",
+        text: "Online Courses",
+      },
+      {
+        type: "text",
+        text: "Master advanced concepts through structured online courses on platforms like Udemy, Coursera, and Frontend Masters. Focus on practical projects and real-world applications.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Daily Notes",
+    preview: "Quick thoughts and progress updates from daily development work...",
+    lastEdited: "May 12, 2026",
+    content: [
+      {
+        type: "heading",
+        text: "Today's Progress",
+      },
+      {
+        type: "text",
+        text: "Successfully completed the portfolio redesign with improved UI/UX. All window components are now functional and properly integrated with the Zustand store.",
+      },
+      {
+        type: "subheading",
+        text: "Completed Tasks",
+      },
+      {
+        type: "list",
+        items: [
+          "Fixed Text window file opening functionality",
+          "Created Image window component for project images",
+          "Redesigned Safari window with links and news",
+          "Built complete Typora notepad application",
+        ],
+      },
+      {
+        type: "text",
+        text: "Next steps: Add animation improvements and optimize performance across all windows.",
+      },
+    ],
+  },
+];
+
 export {
   navLinks,
   navIcons,
@@ -268,6 +481,10 @@ export {
   socials,
   photosLinks,
   gallery,
+  safariSocialLinks,
+  safariCodingLinks,
+  safariNews,
+  typoraNotes,
 };
 
 const WORK_LOCATION = {
@@ -540,7 +757,6 @@ const TRASH_LOCATION = {
 
 export const locations = {
   work: WORK_LOCATION,
-  about: ABOUT_LOCATION,
   resume: RESUME_LOCATION,
   trash: TRASH_LOCATION,
 };
@@ -555,9 +771,9 @@ const WINDOW_CONFIG = {
   photos: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
-  github: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },    
-  spotify: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
+  imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
+  spotify: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null }, 
+  typora: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };

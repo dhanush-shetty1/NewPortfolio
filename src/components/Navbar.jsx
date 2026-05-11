@@ -1,18 +1,14 @@
 import { navIcons, navLinks } from '#constants'
 import React from 'react'
 import dayjs from 'dayjs'
+import useWindowStore from '#store/window'
 const Navbar = () => {
+  const {openWindow}=useWindowStore();
   return <nav>
     <div>
       <img src="/images/logo.svg" /> 
       <p className='font-bold'>Dhanush's Portfolio</p>
-      <ul>
-        {navLinks.map(({id,name})=>(
-          <li key={id}>
-            <p>{name}</p>
-          </li>
-        ))}
-      </ul>
+      
     </div>
     <div>
       <ul>
