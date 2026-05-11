@@ -108,28 +108,76 @@ const blogPosts = [
 
 const techStack = [
   {
+    category: "Languages",
+    items: [
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "Java",
+      "C/C++",
+      "Solidity",
+      "HTML",
+      "CSS",
+    ],
+  },
+  {
     category: "Frontend",
-    items: ["React.js", "Next.js", "TypeScript"],
-  },
-  {
-    category: "Mobile",
-    items: ["React Native", "Expo"],
-  },
-  {
-    category: "Styling",
-    items: ["Tailwind CSS", "Sass", "CSS"],
+    items: [
+      "React.js",
+      "Next.js",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "Bootstrap",
+      "ShadCN",
+    ],
   },
   {
     category: "Backend",
-    items: ["Node.js", "Express", "NestJS", "Hono"],
+    items: [
+      "Node.js",
+      "Express.js",
+    ],
+  },
+  {
+    category: "Blockchain",
+    items: [
+      "Solidity",
+      "Ethers.js",
+      "Hardhat",
+    ],
+  },
+  {
+    category: "AI / ML",
+    items: [
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+    ],
   },
   {
     category: "Database",
-    items: ["MongoDB", "PostgreSQL"],
+    items: [
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "SQL",
+    ],
   },
   {
-    category: "Dev Tools",
-    items: ["Git", "GitHub", "Docker"],
+    category: "Developer Tools",
+    items: [
+      "Git",
+      "GitHub",
+      "Docker",
+      "Postman",
+      "Vercel",
+      "Vite",
+      "VS Code",
+      "Figma",
+      "Canva",
+    ],
   },
 ];
 
