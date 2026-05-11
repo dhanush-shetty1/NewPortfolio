@@ -7,7 +7,7 @@ body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
-  background-image: url("/images/wallpaper.png");
+  background-image: url("/images/dq.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -79,25 +79,24 @@ body {
   }
 
   #dock {
-    @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
+  @apply absolute bottom-5 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
 
-    .dock-container {
-      @apply bg-white/20 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5;
-    }
+  .dock-container {
+    @apply bg-white/20 backdrop-blur-md justify-between rounded-2xl p-1.5 flex items-end gap-1.5;
+  }
 
-    .tooltip {
-      @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !bg-blue-200 !text-blue-900 !shadow-2xl;
-    }
+  .tooltip {
+    @apply !py-1 !px-3 !w-fit !text-center !text-xs !rounded-md !bg-blue-200 !text-blue-900 !shadow-2xl;
+  }
 
-    .dock-icon {
-      @apply size-14 3xl:size-20 cursor-pointer;
-    
+  .dock-icon {
+    @apply size-14 3xl:size-20 cursor-pointer;
 
-      img {
-        @apply object-cover object-center;
-      }
+    img {
+      @apply object-contain object-center w-full h-full;
     }
   }
+}
 
   #window-controls {
     @apply flex gap-2;
@@ -120,13 +119,29 @@ body {
   }
 
   #safari {
-    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    @apply w-4xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
 
     .search {
       @apply flex items-center gap-3 w-2/3 bg-white border border-gray-300 rounded-lg px-3 py-2;
 
       input {
         @apply placeholder:text-gray-400;
+      }
+    }
+
+    .safari-content {
+      @apply flex-1 overflow-y-auto max-h-[calc(100vh-200px)];
+
+      &::-webkit-scrollbar {
+        @apply w-2;
+      }
+
+      &::-webkit-scrollbar-track {
+        @apply bg-transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        @apply bg-gray-400 rounded-full;
       }
     }
 
@@ -390,6 +405,62 @@ body {
 
         p {
           @apply text-sm text-white text-center px-1 rounded-md group-hover:bg-blue-500 transition-colors max-w-40;
+        }
+      }
+    }
+  }
+
+  #typora {
+    @apply w-5xl h-[36rem] absolute top-1/4 right-1/4 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
+
+    .typora-container {
+      @apply flex flex-1 overflow-hidden;
+
+      .typora-sidebar {
+        @apply w-64 flex flex-col bg-gray-50;
+
+        &::-webkit-scrollbar {
+          @apply w-2;
+        }
+
+        &::-webkit-scrollbar-track {
+          @apply bg-transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          @apply bg-gray-300 rounded-full hover:bg-gray-400;
+        }
+      }
+
+      .typora-editor {
+        @apply flex-1 flex flex-col bg-white overflow-hidden;
+
+        textarea {
+          @apply text-base leading-relaxed px-8 py-6 resize-none outline-none;
+
+          &::-webkit-scrollbar {
+            @apply w-2;
+          }
+
+          &::-webkit-scrollbar-track {
+            @apply bg-transparent;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            @apply bg-gray-300 rounded-full hover:bg-gray-400;
+          }
+        }
+
+        &::-webkit-scrollbar {
+          @apply w-2;
+        }
+
+        &::-webkit-scrollbar-track {
+          @apply bg-transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          @apply bg-gray-400 rounded-full hover:bg-gray-500;
         }
       }
     }
