@@ -1,6 +1,6 @@
 import windowWrapper from '#hoc/windowWrapper'
 import { useState, useCallback } from 'react'
-import { Mail, Phone, Send, User, MessageSquare } from 'lucide-react'
+import { Mail, Phone, User, MessageSquare } from 'lucide-react'
 import { WindowControlls } from '#components'
 
 const inputStyle = {
@@ -28,22 +28,12 @@ const labelStyle = {
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [sent, setSent] = useState(false)
   const [focused, setFocused] = useState(null)
 
   const handleChange = useCallback((e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
   }, [])
-
-  const handleSend = () => {
-    if (!formData.name || !formData.email || !formData.message) return
-    setSent(true)
-    setTimeout(() => {
-      setSent(false)
-      setFormData({ name: '', email: '', message: '' })
-    }, 2500)
-  }
 
   const getBorder = (field) => ({
     ...inputStyle,
@@ -213,28 +203,6 @@ const Contact = () => {
                 />
               </div>
             </div>
-
-            <button
-              onClick={handleSend}
-              style={{
-                width: '100%',
-                padding: '9px 16px',
-                borderRadius: '8px',
-                border: 'none',
-                background: sent ? '#34c759' : '#007aff',
-                color: 'white',
-                fontSize: '13px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px',
-                transition: 'background 0.2s',
-              }}
-            >
-              {sent ? '✓ Message Sent!' : <><Send size={13} /> Send Message</>}
-            </button>
           </div>
         </div>
       </div>
