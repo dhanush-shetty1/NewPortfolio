@@ -252,65 +252,52 @@ body {
     }
   }
 
-  #photos {
-    @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+#photos {
+  @apply absolute top-20 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
 
-    .sidebar {
-      @apply w-3/12 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-5;
+  width: 900px;
+  height: 600px;
 
-      h2 {
-        @apply text-xs font-medium text-gray-400 mb-1;
-      }
+  #window-header {
+    @apply flex-shrink-0;
+  }
 
-      ul {
-        li {
-          @apply flex space-y-1 items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors;
+  .sidebar {
+    @apply w-56 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-4;
 
-          &:first-child {
-            @apply bg-blue-100 text-blue-700;
-          }
-
-          img {
-            @apply w-4;
-          }
-
-          p {
-            @apply text-sm font-medium;
-          }
-        }
-      }
+    h2 {
+      @apply text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide;
     }
 
-    .gallery {
-      @apply p-5;
+    ul {
+      @apply space-y-1;
 
-      ul {
-        @apply grid grid-cols-5 grid-rows-5 gap-2.5;
+      li {
+        @apply flex items-center gap-2 px-2 py-2 rounded-md cursor-pointer transition-colors;
 
-        li {
-          img {
-            @apply size-full object-cover rounded-lg;
-          }
+        &:first-child {
+          @apply bg-blue-100 text-blue-700;
+        }
 
-          &:first-child {
-            @apply row-start-1 row-span-3 col-start-1 col-span-3;
-          }
+        &:hover {
+          @apply bg-gray-200;
+        }
 
-          &:nth-child(2) {
-            @apply row-start-1 row-span-3 col-start-4 col-span-2;
-          }
+        img {
+          @apply w-4 h-4;
+        }
 
-          &:nth-child(3) {
-            @apply row-start-4 row-span-2 col-start-3 col-span-3;
-          }
-
-          &:last-child {
-            @apply row-start-4 row-span-2 col-start-1 col-span-2;
-          }
+        p {
+          @apply text-xs font-medium;
         }
       }
     }
   }
+
+  > div:last-child {
+    @apply flex-1 flex overflow-hidden;
+  }
+}
 
   #resume {
     @apply w-fit h-fit absolute top-16 left-7/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
