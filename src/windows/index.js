@@ -5,4 +5,5 @@ import Finder from "./Finder";
 import Text from "./Text";
 import Image from "./Image";
 import Typora from "./Typora";
-export {Terminal,Safari, Resume, Finder,Text,Image,Typora};
+import Contact from "./Contact";
+export {Terminal,Safari, Resume, Finder,Text,Image,Typora, Contact};
