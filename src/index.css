@@ -255,8 +255,8 @@ body {
 #photos {
   @apply absolute top-20 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
 
-  width: 900px;
-  height: 600px;
+  width: 920px;
+  height: 520px;
 
   #window-header {
     @apply flex-shrink-0;

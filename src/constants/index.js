@@ -218,35 +218,36 @@ const safariSocialLinks = [
     name: "Email",
     color: "#E74C3C",
     letter: "✉",
+    icon: "/images/gmail.svg",
     link: "mailto:your-email@example.com",
   },
   {
     id: 2,
     name: "GitHub",
     color: "#1B1B1B",
-    letter: "⚙",
-    link: "https://github.com",
+    icon: "/images/github.png",
+    link: "https://github.com/dhanush-shetty1",
   },
   {
     id: 3,
     name: "LinkedIn",
     color: "#0077B5",
-    letter: "in",
-    link: "https://linkedin.com",
+    icon: "/images/linkedin.svg",
+    link: "https://www.linkedin.com/in/dhanush-shetty-b81468296/",
   },
   {
     id: 4,
-    name: "Twitter",
+    name: "X",
     color: "#1DA1F2",
-    letter: "𝕏",
-    link: "https://twitter.com",
+    icon:"/images/x.avif",
+    link: "https://x.com/Decaptiator",
   },
   {
     id: 5,
     name: "Instagram",
     color: "#E4405F",
-    letter: "📷",
-    link: "https://instagram.com",
+    icon:"/images/insta.jpg",
+    link: "https://www.instagram.com/dhan.ushs",
   },
 ];
 
@@ -256,48 +257,51 @@ const safariCodingLinks = [
     name: "LeetCode",
     color: "#FFA500",
     letter: "LC",
-    link: "https://leetcode.com",
+    icon: "/images/leetcode.svg",
+    link: "https://leetcode.com/u/KamiGatso/",
   },
   {
     id: 2,
-    name: "GitHub",
+    name: "Neetcode",
     color: "#1B1B1B",
     letter: "GH",
-    link: "https://github.com",
+    icon: "/images/nc.jpeg",
+    link: "https://neetcode.io/profile",
   },
   {
     id: 3,
     name: "GeeksforGeeks",
     color: "#2F8D46",
     letter: "GG",
+    icon: "/images/gfg.png",
     link: "https://geeksforgeeks.org",
   },
   {
     id: 4,
     name: "Codolio",
     color: "#667EEA",
-    letter: "CD",
+    icon:"/images/codolio.jpeg",
     link: "https://codolio.com",
   },
   {
     id: 5,
     name: "HackerRank",
     color: "#00EA64",
-    letter: "HR",
+    icon:"/images/hr.jpg",
     link: "https://hackerrank.com",
   },
   {
     id: 6,
     name: "CodeChef",
     color: "#5B4A8F",
-    letter: "CC",
+    icon:"/images/cf.png",
     link: "https://codechef.com",
   },
   {
     id: 7,
     name: "CodeForces",
     color: "#1F8ACB",
-    letter: "CF",
+    icon:"/images/forces.webp",
     link: "https://codeforces.com",
   },
 ];
@@ -354,20 +358,19 @@ const photosLinks = [
 const gallery = [
   {
     id: 1,
-    img: "/images/gal1.png",
+    img: "/images/pp.jpeg",
   },
   {
     id: 2,
-    img: "/images/gal2.png",
+    img: "/images/eth.jpeg",
   },
   {
     id: 3,
-    img: "/images/gal3.png",
+    img: "/images/sih.jpeg",
   },
-  {
-    id: 4,
-    img: "/images/gal4.png",
-  },
+  
+  
+  
 ];
 
 const typoraNotes = [
@@ -497,11 +500,11 @@ const WORK_LOCATION = {
     // ▶ Project 1
     {
       id: 5,
-      name: "Nike Ecommerce Website Application",
+      name: "Mockly",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-5", // icon position inside Finder
-      windowPosition: "top-[0vh] left-1", // optional: Finder window position
+      windowPosition: "top-[0vh] left-5", // optional: Finder window position
       children: [
         {
           id: 1,
@@ -550,11 +553,11 @@ const WORK_LOCATION = {
     // ▶ Project 2
     {
       id: 6,
-      name: "AI Resume Analyzer",
+      name: "StakED",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-52 right-80",
-      windowPosition: "top-[17vh] left-5",
+      windowPosition: "top-[15vh] left-5",
       children: [
         {
           id: 1,
@@ -603,11 +606,11 @@ const WORK_LOCATION = {
     // ▶ Project 3
     {
       id: 7,
-      name: "Food Delivery App",
+      name: "HiFI",
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-10 left-80",
-      windowPosition: "top-[31vh] left-7",
+      windowPosition: "top-[30vh] left-5",
       children: [
         {
           id: 1,
@@ -741,7 +744,7 @@ const TRASH_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-10 left-10",
-      imageUrl: "/images/trash-1.png",
+      imageUrl: "/images/mog.jpeg",
     },
     {
       id: 2,
@@ -750,7 +753,7 @@ const TRASH_LOCATION = {
       kind: "file",
       fileType: "img",
       position: "top-40 left-80",
-      imageUrl: "/images/trash-2.png",
+      imageUrl: "/images/monkeh.jpeg",
     },
   ],
 };

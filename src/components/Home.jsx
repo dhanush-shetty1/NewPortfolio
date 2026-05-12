@@ -20,8 +20,14 @@ const Home = () => {
     openWindow("finder");
   };
 
+  const handleOpenResume = () => {
+    openWindow("resume");
+    setTimeout(() => openWindow("resume"), 0);
+  };
+
   useGSAP(() => {
     Draggable.create(".folder");
+    Draggable.create(".resume-file");
   }, []);
 
   return (
@@ -47,6 +53,18 @@ const Home = () => {
           </li>
 
         ))}
+
+        <li
+          className="group resume-file absolute top-32 right-5 z-0 select-none flex items-center flex-col"
+          onClick={handleOpenResume}
+        >
+          <img
+            src="/images/pdf.png"
+            alt="Resume"
+            style={{ width: "64px", height: "64px" }}
+          />
+          <p>Resume.pdf</p>
+        </li>
 
       </ul>
 
