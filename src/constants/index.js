@@ -502,7 +502,7 @@ const WORK_LOCATION = {
       name: "Mockly",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-5",
+      position: "top-16 left-5",
       windowPosition: "top-[0vh] left-5",
       children: [
         {
@@ -554,7 +554,7 @@ const WORK_LOCATION = {
       name: "StakED",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-52 right-80",
+      position: "top-16 left-48",
       windowPosition: "top-[15vh] left-5",
       children: [
         {
@@ -606,7 +606,7 @@ const WORK_LOCATION = {
       name: "HiFI",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-10 left-80",
+      position: "top-16 left-80",
       windowPosition: "top-[30vh] left-5",
       children: [
         {
@@ -658,7 +658,7 @@ const WORK_LOCATION = {
       name: "Old Portfolio",
       icon: "/images/folder.png",
       kind: "folder",
-      position: "top-60 left-40",
+      position: "top-16 right-5",
       windowPosition: "top-[45vh] left-4",
       children: [
         {

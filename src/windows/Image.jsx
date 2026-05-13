@@ -63,6 +63,6 @@ const Image = () => {
   );
 };
 
-const ImageWindow = WindowWrapper(Image, "imgfile");
+const ImageWindow = windowWrapper(Image, "imgfile");
 
 export default ImageWindow;
