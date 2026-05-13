@@ -2,25 +2,43 @@ import { WindowControlls } from "#components";
 import windowWrapper from "#hoc/windowWrapper";
 import { photosLinks, gallery } from "#constants/index.js";
 import { useState } from "react";
+import { Mail, Search } from "lucide-react";
+import useWindowStore from "#store/window.js";
 
 const Photos = () => {
   const [activeLink, setActiveLink] = useState(photosLinks[0].id);
+  const { openWindow, focusWindow } = useWindowStore();
+
+  const handlePhotoClick = (photo, e) => {
+    e.stopPropagation();
+    const photoData = {
+      name: `Photo ${photo.id}`,
+      imageUrl: photo.img,
+      subtitle: null,
+      description: null,
+    };
+    openWindow("imgfile", photoData);
+    setTimeout(() => focusWindow("imgfile"), 0);
+  };
 
   return (
     <>
       <div id="window-header">
         <WindowControlls target="photos" />
-        <h2>Gallery</h2>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "auto" }}>
+          <Mail className="icon"></Mail>
+          <Search className="icon"/>
+        </div>
       </div>
 
       <div
         style={{
           display: "flex",
           flex: 1,
-          width: "900px",
-          height: "600px",
-          minWidth: "900px",
-          minHeight: "600px",
+          width: "920px",
+          height: "520px",
+          minWidth: "920px",
+          minHeight: "520px",
           overflow: "hidden",
         }}
       >
@@ -114,48 +132,25 @@ const Photos = () => {
           <ul
             style={{
               display: "grid",
-              gridTemplateColumns: "1.4fr 0.95fr",
-              gridTemplateRows: "240px 200px",
-              gap: "10px",
+              gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+              gap: "8px",
               listStyle: "none",
               padding: 0,
               margin: 0,
+              width: "100%",
             }}
           >
-            {gallery.map((item, index) => {
-              let gridStyle = {};
-
-              if (index === 0)
-                gridStyle = {
-                  gridColumn: "1 / span 1",
-                  gridRow: "1 / span 1",
-                };
-              else if (index === 1)
-                gridStyle = {
-                  gridColumn: "2 / span 1",
-                  gridRow: "1 / span 1",
-                };
-              else if (index === 2)
-                gridStyle = {
-                  gridColumn: "1 / span 1",
-                  gridRow: "2 / span 1",
-                };
-              else if (index === 3)
-                gridStyle = {
-                  gridColumn: "2 / span 1",
-                  gridRow: "2 / span 1",
-                };
-
-              return (
+            {gallery.map((item) => (
                 <li
                   key={item.id}
+                  onClick={(e) => handlePhotoClick(item, e)}
                   style={{
-                    ...gridStyle,
                     cursor: "pointer",
                     overflow: "hidden",
-                    borderRadius: "14px",
+                    borderRadius: "8px",
                     boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
                     transition: "all 0.2s",
+                    aspectRatio: "1",
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.boxShadow =
@@ -177,8 +172,7 @@ const Photos = () => {
                     }}
                   />
                 </li>
-              );
-            })}
+              ))}  
           </ul>
         </div>
 

@@ -55,9 +55,9 @@ const Safari = () => {
 
         {/* SNS Links Section */}
         <div className='mb-12'>
-          <h2 className='text-3xl font-bold mb-6 text-gray-900'>SNS Links</h2>
+          <h2 className='text-3xl font-bold mb-6 text-gray-900'>Find me online</h2>
           <div className='grid grid-cols-5 gap-6'>
-            {safariSocialLinks.map(({ id, name, color, letter, link }) => (
+            {safariSocialLinks.map(({ id, name, color, letter, icon, link }) => (
               <a
                 key={id}
                 href={link}
@@ -66,10 +66,14 @@ const Safari = () => {
                 className='flex flex-col items-center gap-2 group cursor-pointer transition-transform hover:scale-110'
               >
                 <div
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: icon ? 'transparent' : color }}
                   className='w-20 h-20 rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:shadow-lg transition-shadow'
                 >
-                  {letter}
+                  {icon ? (
+                    <img src={icon} alt={name} className='w-full h-full object-contain p-2' />
+                  ) : (
+                    letter
+                  )}
                 </div>
                 <p className='text-sm font-medium text-center text-gray-700'>
                   {name}
@@ -81,9 +85,9 @@ const Safari = () => {
 
         {/* Coding Links Section */}
         <div className='mb-12'>
-          <h2 className='text-3xl font-bold mb-6 text-gray-900'>Coding Platforms</h2>
+          <h2 className='text-3xl font-bold mb-6 text-gray-900'>Developer Presence</h2>
           <div className='grid grid-cols-7 gap-4'>
-            {safariCodingLinks.map(({ id, name, color, letter, link }) => (
+            {safariCodingLinks.map(({ id, name, color, letter, icon, link }) => (
               <a
                 key={id}
                 href={link}
@@ -92,10 +96,14 @@ const Safari = () => {
                 className='flex flex-col items-center gap-2 group cursor-pointer transition-transform hover:scale-110'
               >
                 <div
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: icon ? 'transparent' : color }}
                   className='w-16 h-16 rounded-lg flex items-center justify-center text-white font-bold text-xs group-hover:shadow-lg transition-shadow'
                 >
-                  {letter}
+                  {icon ? (
+                    <img src={icon} alt={name} className='w-full h-full object-contain p-2' />
+                  ) : (
+                    letter
+                  )}
                 </div>
                 <p className='text-xs font-medium text-center text-gray-700 line-clamp-2'>
                   {name}
@@ -109,16 +117,20 @@ const Safari = () => {
         <div className='mb-12'>
           <h2 className='text-3xl font-bold mb-6 text-gray-900'>Frequently Visited</h2>
           <div className='grid grid-cols-5 gap-6'>
-            {safariCodingLinks.slice(0, 5).map(({ id, name, color, letter }) => (
+            {safariCodingLinks.slice(0, 5).map(({ id, name, color, letter, icon }) => (
               <div
                 key={id}
                 className='flex flex-col items-center gap-2 group cursor-pointer transition-transform hover:scale-110'
               >
                 <div
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: icon ? 'transparent' : color }}
                   className='w-20 h-20 rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:shadow-lg transition-shadow'
                 >
-                  {letter}
+                  {icon ? (
+                    <img src={icon} alt={name} className='w-full h-full object-contain p-2' />
+                  ) : (
+                    letter
+                  )}
                 </div>
                 <p className='text-sm font-medium text-center text-gray-700'>
                   {name}
