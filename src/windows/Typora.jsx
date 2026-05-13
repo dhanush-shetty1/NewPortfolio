@@ -1,4 +1,4 @@
-import WindowWrapper from "#hoc/WindowWrapper.jsx";
+import windowwrapper from "#hoc/windowwrapper.jsx";
 import { WindowControlls } from "#components";
 import useWindowStore from "#store/window.js";
 import { typoraNotes as initialNotes } from "#constants";
@@ -394,6 +394,6 @@ const Typora = () => {
   );
 };
 
-const TyporaWindow = WindowWrapper(Typora, "typora");
+const TyporaWindow = windowwrapper(Typora, "typora");
 
 export default TyporaWindow;

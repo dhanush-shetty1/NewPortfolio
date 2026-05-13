@@ -1,4 +1,4 @@
-import WindowWrapper from "#hoc/WindowWrapper.jsx";
+import windowWrapper from "#hoc/windowWrapper.jsx";
 import { WindowControlls } from "#components/index.js";
 import { Download } from "lucide-react";
 import { pdfjs, Document, Page } from "react-pdf";
@@ -50,6 +50,6 @@ const Resume = () => {
   );
 };
 
-const ResumeWindow = WindowWrapper(Resume, "resume");
+const ResumeWindow = windowWrapper(Resume, "resume");
 
 export default ResumeWindow;

@@ -1,4 +1,4 @@
-import WindowWrapper from "#hoc/WindowWrapper.jsx";
+import windowWrapper from "#hoc/windowWrapper.jsx";
 import { WindowControlls } from "#components";
 import useWindowStore from "#store/window.js";
 

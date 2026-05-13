@@ -1,6 +1,6 @@
 import { WindowControlls } from "#components";
 import { Search } from "lucide-react";
-import WindowWrapper from "#hoc/WindowWrapper.jsx";
+import windowWrapper from "#hoc/windowWrapper";
 import { locations } from "#constants/index.js";
 import useLocationStore from "#store/location.js";
 import useWindowStore from "#store/window.js";
@@ -101,6 +101,6 @@ const Finder = () => {
   );
 };
 
-const FinderWindow = WindowWrapper(Finder, "finder");
+const FinderWindow = windowWrapper(Finder, "finder");
 
 export default FinderWindow;

@@ -1,4 +1,4 @@
-import WindowWrapper from "#hoc/WindowWrapper.jsx";
+import windowwrapper from "#hoc/windowwrapper.jsx";
 import { WindowControlls } from "#components";
 import useWindowStore from "#store/window.js";
 
@@ -63,6 +63,6 @@ const Text = () => {
   );
 };
 
-const TextWindow = WindowWrapper(Text, "txtfile");
+const TextWindow = windowwrapper(Text, "txtfile");
 
 export default TextWindow;
