@@ -141,7 +141,7 @@ const Welcome = () => {
         className='text-3xl font-georama text-white'
       >
         {renderText(
-          "Hey, I'm Dhanush! Welcome to my",
+          "Hey, I'm Dhanush Shetty! Welcome to my",
           'text-3xl font-georama',
           FONT_WEIGHTS.subtitle.default
         )}

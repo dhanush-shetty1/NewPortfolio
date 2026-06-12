@@ -3,4 +3,6 @@ import Welcome from "./Welcome";
 import WindowControlls from "./WindowControlls";
 import Dock from "./Dock";
 import Home from "./Home";
-export  {Navbar,Welcome,Dock,WindowControlls,Home}
+import Boot from "./Boot";
+import Login from "./Login";
+export { Navbar, Welcome, Dock, WindowControlls, Home, Boot, Login }

@@ -62,14 +62,14 @@ const dockApps = [
   },
   {
     id: "terminal",
-    name: "Skills", // was "Terminal"
+    name: "Terminal", // was "Terminal"
     icon: "terminal.png",
     canOpen: true,
   },
   {
-    id: "typora",
-    name: "Typora", // was "Trash"
-    icon: "typora.png",
+    id: "notes",
+    name: "Notes", // was "Trash"
+    icon: "notes.png",
     canOpen: true,
   },
   {
@@ -78,7 +78,12 @@ const dockApps = [
     icon: "spotify.png",
     canOpen: true,
   },
-  
+  {
+    id: "calculator",
+    name: "Calculator", // was "Trash"
+    icon: "calculator.png",
+    canOpen: true,
+  },
 ];
 
 const blogPosts = [
@@ -464,7 +469,7 @@ const typoraNotes = [
           "Fixed Text window file opening functionality",
           "Created Image window component for project images",
           "Redesigned Safari window with links and news",
-          "Built complete Typora notepad application",
+          "Built complete Notes application",
         ],
       },
       {
@@ -503,7 +508,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-5",
-      windowPosition: "top-[0vh] left-5",
+      windowPosition: "top-[6vh] left-5",
       children: [
         {
           id: 1,
@@ -555,7 +560,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-48",
-      windowPosition: "top-[15vh] left-5",
+      windowPosition: "top-[21vh] left-5",
       children: [
         {
           id: 1,
@@ -607,7 +612,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-80",
-      windowPosition: "top-[30vh] left-5",
+      windowPosition: "top-[36vh] left-5",
       children: [
         {
           id: 1,
@@ -659,7 +664,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 right-5",
-      windowPosition: "top-[45vh] left-4",
+      windowPosition: "top-[51vh] left-4",
       children: [
         {
           id: 1,
@@ -824,7 +829,9 @@ const WINDOW_CONFIG = {
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
   spotify: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null }, 
-  typora: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
+  calculator: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null }, 
+  notes: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },   
+  about: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };
