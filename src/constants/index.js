@@ -373,8 +373,14 @@ const gallery = [
     id: 3,
     img: "/images/sih.jpeg",
   },
-  
-  
+  {
+    id: 4,
+    img: "/images/1.jpeg",
+  },
+  {
+    id: 5,
+    img: "/images/2.jpeg",
+  },
   
 ];
 

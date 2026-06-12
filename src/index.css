@@ -43,6 +43,10 @@ body {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
+@utility mac-shadow {
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.28), 0 0 0 0.5px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
 @layer base {
   main {
     @apply w-dvw h-dvh overflow-hidden;
@@ -203,50 +207,9 @@ body {
   }
 
 #photos {
-  @apply absolute top-20 left-1/2 -translate-x-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
-
+  @apply absolute top-20 left-1/2 -translate-x-1/2 mac-shadow rounded-xl overflow-hidden flex flex-col;
   width: 920px;
   height: 520px;
-
-  #window-header {
-    @apply flex-shrink-0;
-  }
-
-  .sidebar {
-    @apply w-56 flex-none bg-gray-50 border-r border-gray-200 flex flex-col p-4;
-
-    h2 {
-      @apply text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide;
-    }
-
-    ul {
-      @apply space-y-1;
-
-      li {
-        @apply flex items-center gap-2 px-2 py-2 rounded-md cursor-pointer transition-colors;
-
-        &:first-child {
-          @apply bg-blue-100 text-blue-700;
-        }
-
-        &:hover {
-          @apply bg-gray-200;
-        }
-
-        img {
-          @apply w-4 h-4;
-        }
-
-        p {
-          @apply text-xs font-medium;
-        }
-      }
-    }
-  }
-
-  > div:last-child {
-    @apply flex-1 flex overflow-hidden;
-  }
 }
 
   #resume {
@@ -260,47 +223,7 @@ body {
   }
 
   #finder {
-    @apply absolute w-4xl h-[32rem] left-40 top-20 shadow-2xl drop-shadow-2xl overflow-hidden rounded-xl;
-
-    .sidebar {
-      @apply w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-5 space-y-3;
-
-      h3 {
-        @apply text-xs font-medium text-gray-400 mb-1;
-      }
-
-      ul {
-        @apply space-y-1;
-
-        .active {
-          @apply bg-blue-100 text-blue-700;
-        }
-
-        .not-active {
-          @apply text-gray-700 hover:bg-gray-200;
-        }
-
-        li {
-          @apply flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors;
-        }
-      }
-    }
-
-    .content {
-      @apply flex-1 p-8 bg-white relative;
-
-      li {
-        @apply absolute flex items-center flex-col gap-3;
-
-        img {
-          @apply object-contain object-center size-16 relative group-hover:scale-105;
-        }
-
-        p {
-          @apply text-sm text-center font-medium w-40;
-        }
-      }
-    }
+    @apply absolute w-4xl h-[32rem] left-40 top-20 mac-shadow rounded-xl overflow-hidden flex flex-col;
   }
 
   #txtfile {
@@ -312,21 +235,7 @@ body {
   }
 
   #imgfile {
-    @apply w-xl absolute top-40 left-2/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-
-    #window-header {
-      p {
-        @apply font-bold text-[#5f6266];
-      }
-    }
-
-    .preview {
-      @apply p-2 bg-gray-200 max-h-[70vh];
-
-      img {
-        @apply w-full h-fit object-contain object-center;
-      }
-    }
+    @apply w-[680px] absolute top-32 left-3/12 mac-shadow rounded-xl overflow-hidden;
   }
 
   #calculator {
