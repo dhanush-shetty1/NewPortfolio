@@ -5,4 +5,6 @@ import Dock from "./Dock";
 import Home from "./Home";
 import Boot from "./Boot";
 import Login from "./Login";
-export { Navbar, Welcome, Dock, WindowControlls, Home, Boot, Login }
+import NotificationCenter from "./NotificationCenter";
+
+export { Navbar, Welcome, Dock, WindowControlls, Home, Boot, Login, NotificationCenter }

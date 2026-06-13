@@ -175,7 +175,7 @@ body {
   }
 
   #terminal {
-    @apply w-xl h-[350px] absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
+    @apply w-xl h-[480px] absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col;
   }
 
   #contact {
@@ -240,6 +240,10 @@ body {
 
   #calculator {
     @apply w-[214px] h-[368px] absolute top-40 left-[45%] bg-[#f4f4f4] border border-black/10 shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden flex flex-col select-none;
+  }
+
+  #about {
+    @apply absolute top-32 left-[calc(50%-170px)];
   }
 
   #home {

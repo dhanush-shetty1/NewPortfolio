@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const loadingInterval = 10; // Use a slightly larger interval for smoother React updates
+const loadingInterval = 10; 
 const bootingInterval = 500;
 
 export default function Boot({ restart, sleep, setBooting }) {

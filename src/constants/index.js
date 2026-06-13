@@ -554,7 +554,7 @@ const WORK_LOCATION = {
           icon: "/images/github.png",
           kind: "file",
           fileType: "fig",
-          href: "https://github.com/Craig-Rosario/Mockly",
+          href: "https://github.com/dhanush-shetty1/MocklyAI",
           position: "top-60 right-20",
         },
       ],

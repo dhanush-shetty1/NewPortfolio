@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import gsap from 'gsap';
-import { Boot, Login, Dock, Home, Navbar, Welcome } from "#components"
+import { Boot, Login, Dock, Home, Navbar, Welcome, NotificationCenter } from "#components"
 import { Text, Image, Notes, Finder, Resume, Safari, Terminal, Contact, Photos, Calculator, About } from "#windows";
 import Draggable from 'gsap/src/Draggable';
 import { motion, AnimatePresence } from 'framer-motion';
 import useWindowStore from '#store/window';
+import useNotificationStore from '#store/notification';
 
 gsap.registerPlugin(Draggable);
 
@@ -14,6 +15,7 @@ const App = () => {
   const [restart, setRestart] = useState(false);
   const [sleep, setSleep] = useState(false);
   const { openWindow } = useWindowStore();
+  const { showNotificationCenter, closeNotificationCenter } = useNotificationStore();
 
   const handleSetBooting = (val) => {
     setBooting(val);
@@ -92,6 +94,7 @@ const App = () => {
               shutMac={handleShutdown}
               setLogin={setLogin}
             />
+            <NotificationCenter show={showNotificationCenter} onClose={closeNotificationCenter} />
             <Welcome />
             <Dock />
             <Safari />

@@ -3,6 +3,45 @@ import { WindowControlls } from "#components";
 import { techStack } from "#constants";
 import windowWrapper from "#hoc/windowWrapper";
 
+const generateSkillsText = (techStack) => {
+  const wrapSkillsLine = (items, maxItemWidth = 45, indentWidth = 20) => {
+    const indent = " ".repeat(indentWidth);
+    let lines = [];
+    let currentLine = "";
+
+    items.forEach((item) => {
+      if (currentLine === "") {
+        currentLine = item;
+      } else {
+        const nextLine = currentLine + ", " + item;
+        if (nextLine.length > maxItemWidth) {
+          lines.push(currentLine + ",");
+          currentLine = item;
+        } else {
+          currentLine = nextLine;
+        }
+      }
+    });
+
+    if (currentLine) {
+      lines.push(currentLine);
+    }
+
+    return lines.join("\n" + indent);
+  };
+
+  let output = "Tech Stack Loaded Successfully:\n";
+  output += "-------------------------------\n";
+  
+  techStack.forEach((stack) => {
+    const category = `${stack.category}:`.padEnd(18, " ");
+    const wrappedItems = wrapSkillsLine(stack.items, 45, 20);
+    output += `  ${category}${wrappedItems}\n`;
+  });
+
+  return output.trim();
+};
+
 const Terminal = () => {
   const [history, setHistory] = useState([
     { text: `Last login: ${new Date().toDateString()} on ttys001`, type: "system" },
@@ -46,11 +85,8 @@ const Terminal = () => {
         break;
 
       case "skills":
-        const lines = techStack.map(
-          (stack) => `  ${stack.category}: ${stack.items.join(", ")}`
-        );
         newHistory.push({
-          text: "Tech Stack Loaded Successfully:\n" + lines.join("\n"),
+          text: generateSkillsText(techStack),
           type: "output",
         });
         break;
