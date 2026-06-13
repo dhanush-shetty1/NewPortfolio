@@ -47,6 +47,18 @@ const useNotificationStore = create(
     showWifiPopup: false,
     activeNetwork: "Dhanush_5G",
 
+    // Control Center States
+    showControlCenter: false,
+    bluetoothOn: true,
+    airdropState: "Everyone", // "Everyone" or "Off"
+    darkMode: true,
+    stageManagerOn: false,
+    screenMirroringOn: false,
+    displayBrightness: 85,
+    soundVolume: 50,
+    isPlayingMusic: false,
+    currentTrackIndex: 0,
+
     dismissNotification: (id) =>
       set((state) => {
         state.notifications = state.notifications.filter((n) => n.id !== id);
@@ -96,6 +108,66 @@ const useNotificationStore = create(
       set((state) => {
         state.activeNetwork = name;
         state.wifiOn = true;
+      }),
+
+    // Control Center Actions
+    toggleControlCenter: () =>
+      set((state) => {
+        state.showControlCenter = !state.showControlCenter;
+      }),
+
+    closeControlCenter: () =>
+      set((state) => {
+        state.showControlCenter = false;
+      }),
+
+    toggleBluetooth: () =>
+      set((state) => {
+        state.bluetoothOn = !state.bluetoothOn;
+      }),
+
+    toggleAirdrop: () =>
+      set((state) => {
+        state.airdropState = state.airdropState === "Everyone" ? "Off" : "Everyone";
+      }),
+
+    toggleDarkMode: () =>
+      set((state) => {
+        state.darkMode = !state.darkMode;
+      }),
+
+    toggleStageManager: () =>
+      set((state) => {
+        state.stageManagerOn = !state.stageManagerOn;
+      }),
+
+    toggleScreenMirroring: () =>
+      set((state) => {
+        state.screenMirroringOn = !state.screenMirroringOn;
+      }),
+
+    setDisplayBrightness: (val) =>
+      set((state) => {
+        state.displayBrightness = val;
+      }),
+
+    setSoundVolume: (val) =>
+      set((state) => {
+        state.soundVolume = val;
+      }),
+
+    togglePlayMusic: () =>
+      set((state) => {
+        state.isPlayingMusic = !state.isPlayingMusic;
+      }),
+
+    setIsPlayingMusic: (val) =>
+      set((state) => {
+        state.isPlayingMusic = val;
+      }),
+    setCurrentTrackIndex: (val) =>
+      set((state) => {
+        state.currentTrackIndex = val;
       }),
   })),
 );

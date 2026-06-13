@@ -32,14 +32,6 @@ const cardVariants = {
   },
 };
 
-const CARD = {
-  background: "rgba(28,28,30,0.75)",
-  backdropFilter: "blur(48px) saturate(190%)",
-  WebkitBackdropFilter: "blur(48px) saturate(190%)",
-  border: "0.5px solid rgba(255,255,255,0.13)",
-  borderRadius: 16,
-};
-
 export default function NotificationCenter({ show, onClose }) {
   const {
     notifications,
@@ -47,7 +39,16 @@ export default function NotificationCenter({ show, onClose }) {
     clearAllNotifications,
     focusMode,
     toggleFocus,
+    darkMode,
   } = useNotificationStore();
+
+  const cardStyle = {
+    background: darkMode ? "rgba(28,28,30,0.75)" : "rgba(240,240,245,0.78)",
+    backdropFilter: "blur(48px) saturate(190%)",
+    WebkitBackdropFilter: "blur(48px) saturate(190%)",
+    border: darkMode ? "0.5px solid rgba(255,255,255,0.13)" : "0.5px solid rgba(0,0,0,0.12)",
+    borderRadius: 16,
+  };
 
   const { winWidth } = useWindowSize();
   const isMobile = winWidth < 768;
@@ -105,7 +106,7 @@ export default function NotificationCenter({ show, onClose }) {
             <motion.div
               variants={cardVariants}
               style={{
-                ...CARD,
+                ...cardStyle,
                 padding: "12px 16px",
                 display: "flex",
                 alignItems: "center",
@@ -116,7 +117,7 @@ export default function NotificationCenter({ show, onClose }) {
                 style={{
                   fontSize: 14,
                   fontWeight: 600,
-                  color: "white",
+                  color: darkMode ? "white" : "#1c1c1e",
                   fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                 }}
               >
@@ -152,7 +153,7 @@ export default function NotificationCenter({ show, onClose }) {
                     style={{
                       background: "none",
                       border: "none",
-                      color: "rgba(255,255,255,0.45)",
+                      color: darkMode ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)",
                       fontSize: 11,
                       fontWeight: 500,
                       cursor: "pointer",
@@ -165,12 +166,12 @@ export default function NotificationCenter({ show, onClose }) {
                 <button
                   onClick={toggleFocus}
                   style={{
-                    background: focusMode ? "#af52de" : "rgba(255,255,255,0.12)",
+                    background: focusMode ? "#af52de" : (darkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.06)"),
                     border: "none",
                     borderRadius: 20,
                     padding: "4px 10px",
                     fontSize: 11,
-                    color: "white",
+                    color: focusMode ? "white" : (darkMode ? "white" : "#1c1c1e"),
                     cursor: "pointer",
                     fontWeight: 500,
                     transition: "background 0.2s ease",
@@ -185,7 +186,7 @@ export default function NotificationCenter({ show, onClose }) {
             <motion.div
               variants={cardVariants}
               style={{
-                ...CARD,
+                ...cardStyle,
                 overflow: "hidden",
                 fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
               }}
@@ -195,7 +196,7 @@ export default function NotificationCenter({ show, onClose }) {
                   style={{
                     padding: "24px 16px",
                     textAlign: "center",
-                    color: "rgba(255,255,255,0.35)",
+                    color: darkMode ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
                     fontSize: 13,
                   }}
                 >
@@ -217,8 +218,10 @@ export default function NotificationCenter({ show, onClose }) {
                         }}
                         transition={{ type: "spring", stiffness: 380, damping: 28 }}
                         style={{
-                          background: n.read ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.08)",
-                          border: "0.5px solid rgba(255,255,255,0.08)",
+                          background: n.read 
+                            ? (darkMode ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)") 
+                            : (darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"),
+                          border: darkMode ? "0.5px solid rgba(255,255,255,0.08)" : "0.5px solid rgba(0,0,0,0.06)",
                           borderRadius: 12,
                           padding: "10px 12px",
                           display: "flex",
@@ -234,7 +237,7 @@ export default function NotificationCenter({ show, onClose }) {
                             height: 32,
                             borderRadius: 8,
                             flexShrink: 0,
-                            background: "rgba(255,255,255,0.1)",
+                            background: darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
                             padding: 2,
                             boxSizing: "border-box",
                           }}
@@ -252,7 +255,7 @@ export default function NotificationCenter({ show, onClose }) {
                               style={{
                                 fontSize: 12,
                                 fontWeight: 600,
-                                color: "rgba(255,255,255,0.9)",
+                                color: darkMode ? "rgba(255,255,255,0.9)" : "#1c1c1e",
                                 whiteSpace: "nowrap",
                                 overflow: "hidden",
                                 textOverflow: "ellipsis",
@@ -263,7 +266,7 @@ export default function NotificationCenter({ show, onClose }) {
                             <span
                               style={{
                                 fontSize: 9,
-                                color: "rgba(255,255,255,0.35)",
+                                color: darkMode ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.45)",
                                 flexShrink: 0,
                                 marginLeft: 6,
                               }}
@@ -274,7 +277,7 @@ export default function NotificationCenter({ show, onClose }) {
                           <p
                             style={{
                               fontSize: 11,
-                              color: "rgba(255,255,255,0.55)",
+                              color: darkMode ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.6)",
                               margin: 0,
                               lineHeight: 1.4,
                               overflow: "hidden",
@@ -289,7 +292,7 @@ export default function NotificationCenter({ show, onClose }) {
                         <button
                           onClick={() => dismissNotification(n.id)}
                           style={{
-                            background: "rgba(255,255,255,0.12)",
+                            background: darkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.06)",
                             border: "none",
                             borderRadius: "50%",
                             width: 18,
@@ -299,7 +302,7 @@ export default function NotificationCenter({ show, onClose }) {
                             justifyContent: "center",
                             cursor: "pointer",
                             flexShrink: 0,
-                            color: "rgba(255,255,255,0.6)",
+                            color: darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)",
                             fontSize: 11,
                             fontWeight: 500,
                             marginTop: -2,
@@ -331,24 +334,24 @@ export default function NotificationCenter({ show, onClose }) {
             >
               <button
                 style={{
-                  background: "rgba(120,120,128,0.32)",
+                  background: darkMode ? "rgba(120, 120, 128, 0.32)" : "rgba(0, 0, 0, 0.06)",
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",
-                  border: "none",
+                  border: darkMode ? "none" : "0.5px solid rgba(0, 0, 0, 0.08)",
                   borderRadius: 20,
                   padding: "5px 14px",
                   fontSize: 12,
                   fontWeight: 500,
-                  color: "white",
+                  color: darkMode ? "white" : "#1c1c1e",
                   cursor: "pointer",
                   fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
                   transition: "background 0.2s ease",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(120,120,128,0.48)";
+                  e.currentTarget.style.background = darkMode ? "rgba(120, 120, 128, 0.48)" : "rgba(0, 0, 0, 0.12)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(120,120,128,0.32)";
+                  e.currentTarget.style.background = darkMode ? "rgba(120, 120, 128, 0.32)" : "rgba(0, 0, 0, 0.06)";
                 }}
               >
                 Edit Widgets

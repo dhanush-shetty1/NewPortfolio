@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import dayjs from 'dayjs'
 import useWindowStore from '#store/window'
 import useNotificationStore from '#store/notification'
-import { Wifi, WifiOff, Lock, Check } from 'lucide-react'
+import { Wifi, WifiOff, Lock, Check, Bluetooth, Radio, Moon, Sun, SunDim, Maximize, Minimize, AppWindow, Tv, Volume2, VolumeX, Play, Pause, Sliders } from 'lucide-react'
+import { TRACKS } from '../windows/Spotify.jsx'
 
 const TopBarItem = React.forwardRef(({ children, className = "", onClick, onMouseEnter, forceHover }, ref) => {
   const [hovered, setHovered] = useState(false);
@@ -37,6 +38,7 @@ const AppleMenu = ({
   onClose,
   openAboutMac,
   btnRef,
+  darkMode,
 }) => {
   const ref = useRef(null);
 
@@ -73,6 +75,13 @@ const AppleMenu = ({
     onClose();
   };
 
+  const bgOuter = "rgba(255, 255, 255, 0.72)";
+  const borderOuter = "1px solid rgba(0, 0, 0, 0.12)";
+  const borderTopOuter = "1px solid rgba(255, 255, 255, 0.45)";
+  const shadowOuter = "0 8px 30px rgba(0, 0, 0, 0.12)";
+  const textColor = "#1c1c1e";
+  const dividerBg = "rgba(0, 0, 0, 0.08)";
+
   const itemStyle = {
     display: "flex",
     alignItems: "center",
@@ -91,11 +100,10 @@ const AppleMenu = ({
     const [hovered, setHovered] = useState(false);
     return (
       <div
-        className="text-black"
         style={{
           ...itemStyle,
           background: hovered ? "rgb(14, 115, 237)" : "transparent",
-          color: hovered ? "#fff" : "inherit",
+          color: hovered ? "#fff" : textColor,
         }}
         onClick={onClick}
         onMouseEnter={() => setHovered(true)}
@@ -128,31 +136,31 @@ const AppleMenu = ({
         width: "240px",
         padding: "5px 0",
         zIndex: 999999,
-        background: "rgba(255, 255, 255, 0.72)",
-        backdropFilter: "blur(30px)",
-        WebkitBackdropFilter: "blur(30px)",
-        border: "1px solid rgba(0, 0, 0, 0.12)",
-        borderTop: "1px solid rgba(255, 255, 255, 0.45)",
-        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        background: bgOuter,
+        backdropFilter: "blur(30px) saturate(190%)",
+        WebkitBackdropFilter: "blur(30px) saturate(190%)",
+        border: borderOuter,
+        borderTop: borderTopOuter,
+        boxShadow: shadowOuter,
         borderRadius: "8px",
         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         fontWeight: 400,
-        color: "#1c1c1e",
+        color: textColor,
       }}
     >
       <MenuItem onClick={handleAbout}>About This Mac</MenuItem>
-      <div className="h-px bg-black/10 my-1 mx-2" />
+      <div style={{ height: "1px", background: dividerBg, margin: "4px 8px" }} />
       <MenuItem>System Settings...</MenuItem>
       <MenuItem>App Store...</MenuItem>
-      <div className="h-px bg-black/10 my-1 mx-2" />
+      <div style={{ height: "1px", background: dividerBg, margin: "4px 8px" }} />
       <MenuItem>Recent Items ›</MenuItem>
-      <div className="h-px bg-black/10 my-1 mx-2" />
+      <div style={{ height: "1px", background: dividerBg, margin: "4px 8px" }} />
       <MenuItem hint="⌥⌘⎋">Force Quit...</MenuItem>
-      <div className="h-px bg-black/10 my-1 mx-2" />
+      <div style={{ height: "1px", background: dividerBg, margin: "4px 8px" }} />
       <MenuItem onClick={handleSleep}>Sleep</MenuItem>
       <MenuItem onClick={handleRestart}>Restart...</MenuItem>
       <MenuItem onClick={handleShut}>Shut Down...</MenuItem>
-      <div className="h-px bg-black/10 my-1 mx-2" />
+      <div style={{ height: "1px", background: dividerBg, margin: "4px 8px" }} />
       <MenuItem onClick={logout} hint="⌃⌘Q">Lock Screen</MenuItem>
       <MenuItem onClick={logout} hint="⇧⌘Q">Log Out Dhanush Shetty...</MenuItem>
     </div>
@@ -166,6 +174,7 @@ const WifiMenu = ({
   btnRef,
   activeNetwork,
   connectNetwork,
+  darkMode,
 }) => {
   const ref = useRef(null);
 
@@ -185,6 +194,15 @@ const WifiMenu = ({
     };
   }, [btnRef, onClose]);
 
+  const bgOuter = "rgba(255, 255, 255, 0.72)";
+  const borderOuter = "1px solid rgba(0, 0, 0, 0.12)";
+  const borderTopOuter = "1px solid rgba(255, 255, 255, 0.45)";
+  const shadowOuter = "0 8px 30px rgba(0, 0, 0, 0.12)";
+  const textColor = "#1c1c1e";
+  const subTextColor = "rgba(0, 0, 0, 0.5)";
+  const dividerBg = "rgba(0, 0, 0, 0.08)";
+  const inactiveBtnBg = "rgba(0, 0, 0, 0.06)";
+
   const itemStyle = {
     display: "flex",
     alignItems: "center",
@@ -196,7 +214,7 @@ const WifiMenu = ({
     transition: "background 0.05s ease, color 0.05s ease",
     userSelect: "none",
     margin: "1px 6px",
-    color: "#1c1c1e",
+    color: textColor,
   };
 
   const WifiMenuItem = ({ children, onClick, active = false, checked = false, hasLock = false }) => {
@@ -206,7 +224,7 @@ const WifiMenu = ({
         style={{
           ...itemStyle,
           background: hovered ? "rgb(14, 115, 237)" : "transparent",
-          color: hovered ? "#fff" : "#1c1c1e",
+          color: hovered ? "#fff" : textColor,
           fontWeight: active ? 600 : 400,
         }}
         onClick={onClick}
@@ -232,23 +250,23 @@ const WifiMenu = ({
         width: "280px",
         padding: "8px 0",
         zIndex: 999999,
-        background: "rgba(255, 255, 255, 0.72)",
-        backdropFilter: "blur(30px)",
-        WebkitBackdropFilter: "blur(30px)",
-        border: "1px solid rgba(0, 0, 0, 0.12)",
-        borderTop: "1px solid rgba(255, 255, 255, 0.45)",
-        boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        background: bgOuter,
+        backdropFilter: "blur(30px) saturate(190%)",
+        WebkitBackdropFilter: "blur(30px) saturate(190%)",
+        border: borderOuter,
+        borderTop: borderTopOuter,
+        boxShadow: shadowOuter,
         borderRadius: "10px",
         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        color: "#1c1c1e",
+        color: textColor,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "6px 14px 8px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div
             style={{
-              background: wifiOn ? "rgb(14, 115, 237)" : "rgba(120, 120, 128, 0.2)",
-              color: wifiOn ? "white" : "#1c1c1e",
+              background: wifiOn ? "rgb(14, 115, 237)" : inactiveBtnBg,
+              color: wifiOn ? "white" : textColor,
               borderRadius: "50%",
               width: 26,
               height: 26,
@@ -261,7 +279,7 @@ const WifiMenu = ({
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontSize: "13px", fontWeight: 600 }}>Wi-Fi</span>
-            <span style={{ fontSize: "10px", color: "rgba(0,0,0,0.5)", marginTop: -2 }}>
+            <span style={{ fontSize: "10px", color: subTextColor, marginTop: -2 }}>
               {wifiOn ? "On" : "Off"}
             </span>
           </div>
@@ -294,11 +312,17 @@ const WifiMenu = ({
         </div>
       </div>
 
-      <div className="h-px bg-black/10 my-1.5 mx-3" />
+      <div 
+        style={{
+          height: "1px",
+          background: dividerBg,
+          margin: "6px 12px",
+        }} 
+      />
 
       {wifiOn ? (
         <>
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "rgba(0,0,0,0.4)", padding: "4px 14px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: subTextColor, padding: "4px 14px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
             Known Networks
           </div>
           <WifiMenuItem 
@@ -309,9 +333,15 @@ const WifiMenu = ({
             Dhanush_5G
           </WifiMenuItem>
           
-          <div className="h-px bg-black/10 my-1.5 mx-3" />
+          <div 
+            style={{
+              height: "1px",
+              background: dividerBg,
+              margin: "6px 12px",
+            }} 
+          />
           
-          <div style={{ fontSize: "11px", fontWeight: 600, color: "rgba(0,0,0,0.4)", padding: "4px 14px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: subTextColor, padding: "4px 14px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
             Other Networks
           </div>
           <WifiMenuItem 
@@ -340,15 +370,503 @@ const WifiMenu = ({
           </WifiMenuItem>
         </>
       ) : (
-        <div style={{ padding: "12px 14px", fontSize: "12px", color: "rgba(0,0,0,0.45)", textAlign: "center", lineHeight: 1.4 }}>
+        <div style={{ padding: "12px 14px", fontSize: "12px", color: subTextColor, textAlign: "center", lineHeight: 1.4 }}>
           No networks available.<br />Turn on Wi-Fi to see nearby networks.
         </div>
       )}
 
-      <div className="h-px bg-black/10 my-1.5 mx-3" />
+      <div 
+        style={{
+          height: "1px",
+          background: dividerBg,
+          margin: "6px 12px",
+        }} 
+      />
       <WifiMenuItem onClick={() => alert("Wi-Fi Settings are managed by macOS System Preferences.")}>
         Wi-Fi Settings...
       </WifiMenuItem>
+    </div>
+  );
+};
+
+const ControlCenter = ({
+  wifiOn,
+  toggleWifi,
+  activeNetwork,
+  bluetoothOn,
+  toggleBluetooth,
+  airdropState,
+  toggleAirdrop,
+  focusMode,
+  toggleFocus,
+  darkMode,
+  toggleDarkMode,
+  stageManagerOn,
+  toggleStageManager,
+  screenMirroringOn,
+  toggleScreenMirroring,
+  displayBrightness,
+  setDisplayBrightness,
+  soundVolume,
+  setSoundVolume,
+  isPlayingMusic,
+  togglePlayMusic,
+  currentTrackIndex,
+  onClose,
+  btnRef,
+}) => {
+  const ref = useRef(null);
+  const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+  const currentTrack = TRACKS[currentTrackIndex] || TRACKS[0];
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target) &&
+        (!btnRef.current || !btnRef.current.contains(event.target))
+      ) {
+        onClose();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [btnRef, onClose]);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.log("Error enabling fullscreen:", err);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  const bgOuter = darkMode 
+    ? "rgba(30, 30, 30, 0.65)" 
+    : "rgba(255, 255, 255, 0.55)";
+  const borderOuter = darkMode 
+    ? "1px solid rgba(255, 255, 255, 0.12)" 
+    : "1px solid rgba(0, 0, 0, 0.08)";
+  const borderTopOuter = darkMode 
+    ? "1px solid rgba(255, 255, 255, 0.2)" 
+    : "1px solid rgba(255, 255, 255, 0.45)";
+  const shadowOuter = darkMode 
+    ? "0 10px 40px rgba(0, 0, 0, 0.45)" 
+    : "0 10px 40px rgba(0, 0, 0, 0.08)";
+  const textColor = darkMode ? "white" : "#1c1c1e";
+  const subTextColor = darkMode ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.5)";
+  const cardBg = darkMode ? "rgba(255, 255, 255, 0.08)" : "rgba(255, 255, 255, 0.65)";
+  const cardBorder = darkMode ? "0.5px solid rgba(255,255,255,0.05)" : "0.5px solid rgba(0,0,0,0.06)";
+  const activeBtnBg = "rgb(14, 115, 237)";
+  const inactiveBtnBg = darkMode ? "rgba(255, 255, 255, 0.12)" : "rgba(0, 0, 0, 0.05)";
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        position: "fixed",
+        top: "38px",
+        right: "8px",
+        width: "320px",
+        padding: "16px",
+        zIndex: 999999,
+        background: bgOuter,
+        backdropFilter: "blur(40px) saturate(190%)",
+        WebkitBackdropFilter: "blur(40px) saturate(190%)",
+        border: borderOuter,
+        borderTop: borderTopOuter,
+        boxShadow: shadowOuter,
+        borderRadius: "20px",
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+        color: textColor,
+        display: "flex",
+        flexDirection: "column",
+        gap: "12px",
+        userSelect: "none",
+      }}
+    >
+      <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "12px" }}>
+        <div
+          style={{
+            background: cardBg,
+            border: cardBorder,
+            borderRadius: "16px",
+            padding: "12px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div
+              onClick={toggleWifi}
+              style={{
+                background: wifiOn ? activeBtnBg : inactiveBtnBg,
+                color: wifiOn ? "white" : textColor,
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "background 0.2s, color 0.2s",
+              }}
+            >
+              {wifiOn ? <Wifi size={14} /> : <WifiOff size={14} />}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+              <span style={{ fontSize: "12px", fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Wi-Fi</span>
+              <span style={{ fontSize: "10px", color: subTextColor, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                {wifiOn ? (activeNetwork || "Home") : "Off"}
+              </span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div
+              onClick={toggleBluetooth}
+              style={{
+                background: bluetoothOn ? activeBtnBg : inactiveBtnBg,
+                color: bluetoothOn ? "white" : textColor,
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "background 0.2s, color 0.2s",
+              }}
+            >
+              <Bluetooth size={14} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>Bluetooth</span>
+              <span style={{ fontSize: "10px", color: subTextColor }}>
+                {bluetoothOn ? "On" : "Off"}
+              </span>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <div
+              onClick={toggleAirdrop}
+              style={{
+                background: airdropState === "Everyone" ? activeBtnBg : inactiveBtnBg,
+                color: airdropState === "Everyone" ? "white" : textColor,
+                borderRadius: "50%",
+                width: "30px",
+                height: "30px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "background 0.2s, color 0.2s",
+              }}
+            >
+              <Radio size={14} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "12px", fontWeight: 600 }}>AirDrop</span>
+              <span style={{ fontSize: "10px", color: subTextColor }}>
+                {airdropState}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <div
+            onClick={toggleFocus}
+            style={{
+              background: cardBg,
+              border: cardBorder,
+              borderRadius: "16px",
+              padding: "10px 12px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "pointer",
+            }}
+          >
+            <div
+              style={{
+                background: focusMode ? "rgb(175, 82, 222)" : inactiveBtnBg,
+                color: focusMode ? "white" : textColor,
+                borderRadius: "50%",
+                width: "28px",
+                height: "28px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Moon size={13} fill={focusMode ? "currentColor" : "none"} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "11px", fontWeight: 600 }}>Focus</span>
+              <span style={{ fontSize: "9px", color: subTextColor, marginTop: -2 }}>
+                {focusMode ? "On" : "Off"}
+              </span>
+            </div>
+          </div>
+
+          <div
+            onClick={toggleDarkMode}
+            style={{
+              background: darkMode ? activeBtnBg : cardBg,
+              color: darkMode ? "white" : textColor,
+              border: darkMode ? "none" : cardBorder,
+              borderRadius: "16px",
+              padding: "10px 12px",
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "pointer",
+              transition: "background 0.2s",
+            }}
+          >
+            <div
+              style={{
+                background: darkMode ? "rgba(255, 255, 255, 0.2)" : inactiveBtnBg,
+                color: darkMode ? "white" : textColor,
+                borderRadius: "50%",
+                width: "28px",
+                height: "28px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {darkMode ? <Moon size={13} fill="currentColor" /> : <Sun size={13} />}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: "11px", fontWeight: 600 }}>
+                Dark Mode
+              </span>
+              <span style={{ fontSize: "9px", color: darkMode ? "rgba(255,255,255,0.75)" : subTextColor, marginTop: -2 }}>
+                {darkMode ? "On" : "Off"}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "10px" }}>
+        <div
+          onClick={() => alert("Keyboard Brightness is managed automatically by ambient light sensor.")}
+          style={{
+            background: cardBg,
+            border: cardBorder,
+            borderRadius: "14px",
+            padding: "8px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "4px",
+            cursor: "pointer",
+            textAlign: "center",
+          }}
+        >
+          <SunDim size={14} />
+          <span style={{ fontSize: "9px", fontWeight: 500, lineHeight: 1.1 }}>Keyboard<br />Brightness</span>
+        </div>
+
+        <div
+          onClick={toggleFullscreen}
+          style={{
+            background: cardBg,
+            border: cardBorder,
+            borderRadius: "14px",
+            padding: "8px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "4px",
+            cursor: "pointer",
+            textAlign: "center",
+          }}
+        >
+          {isFullscreen ? <Minimize size={14} /> : <Maximize size={14} />}
+          <span style={{ fontSize: "9px", fontWeight: 500, lineHeight: 1.1 }}>
+            {isFullscreen ? "Exit\nFullscreen" : "Enter\nFullscreen"}
+          </span>
+        </div>
+
+        <div
+          onClick={toggleStageManager}
+          style={{
+            background: stageManagerOn ? activeBtnBg : cardBg,
+            color: stageManagerOn ? "white" : textColor,
+            border: stageManagerOn ? "none" : cardBorder,
+            borderRadius: "14px",
+            padding: "8px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "4px",
+            cursor: "pointer",
+            textAlign: "center",
+            transition: "background 0.2s",
+          }}
+        >
+          <AppWindow size={14} />
+          <span style={{ fontSize: "9px", fontWeight: 500, lineHeight: 1.1 }}>Stage<br />Manager</span>
+        </div>
+
+        <div
+          onClick={toggleScreenMirroring}
+          style={{
+            background: screenMirroringOn ? activeBtnBg : cardBg,
+            color: screenMirroringOn ? "white" : textColor,
+            border: screenMirroringOn ? "none" : cardBorder,
+            borderRadius: "14px",
+            padding: "8px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "4px",
+            cursor: "pointer",
+            textAlign: "center",
+            transition: "background 0.2s",
+          }}
+        >
+          <Tv size={14} />
+          <span style={{ fontSize: "9px", fontWeight: 500, lineHeight: 1.1 }}>Screen<br />Mirroring</span>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div
+          style={{
+            background: cardBg,
+            border: cardBorder,
+            borderRadius: "14px",
+            padding: "10px 12px 8px",
+          }}
+        >
+          <span style={{ fontSize: "11px", fontWeight: 600, display: "block", marginBottom: "4px" }}>Display</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <Sun size={12} style={{ opacity: 0.6 }} />
+            <input
+              type="range"
+              min="20"
+              max="100"
+              value={displayBrightness}
+              onChange={(e) => setDisplayBrightness(Number(e.target.value))}
+              className="mac-slider"
+              style={{
+                background: darkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)",
+              }}
+            />
+          </div>
+        </div>
+
+        <div
+          style={{
+            background: cardBg,
+            border: cardBorder,
+            borderRadius: "14px",
+            padding: "10px 12px 8px",
+          }}
+        >
+          <span style={{ fontSize: "11px", fontWeight: 600, display: "block", marginBottom: "4px" }}>Sound</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            {soundVolume === 0 ? <VolumeX size={12} style={{ opacity: 0.6 }} /> : <Volume2 size={12} style={{ opacity: 0.6 }} />}
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={soundVolume}
+              onChange={(e) => setSoundVolume(Number(e.target.value))}
+              className="mac-slider"
+              style={{
+                background: darkMode ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
+          background: cardBg,
+          border: cardBorder,
+          borderRadius: "14px",
+          padding: "10px 12px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <img
+            src={currentTrack.cover}
+            onError={(e) => { e.target.src = currentTrack.fallbackCover; }}
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "8px",
+              objectFit: "cover",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.15)",
+            }}
+            alt={currentTrack.title}
+          />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: "12px", fontWeight: 600 }}>{currentTrack.title}</span>
+            <span style={{ fontSize: "9px", color: subTextColor, marginTop: -2 }}>{currentTrack.artist}</span>
+          </div>
+        </div>
+
+        <button
+          onClick={togglePlayMusic}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: textColor,
+            cursor: "pointer",
+            width: "30px",
+            height: "30px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {isPlayingMusic ? <Pause size={18} fill="currentColor" /> : <Play size={18} fill="currentColor" />}
+        </button>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "6px",
+          fontSize: "11px",
+          color: subTextColor,
+          paddingTop: "4px",
+          cursor: "pointer",
+        }}
+        onClick={() => alert("Edit Controls are locked by Administrator Dhanush.")}
+      >
+        <Sliders size={11} />
+        <span>Edit Controls</span>
+      </div>
     </div>
   );
 };
@@ -395,9 +913,32 @@ const Navbar = ({ onOpenAbout, sleepMac, restartMac, shutMac, setLogin }) => {
     closeWifiPopup,
     activeNetwork,
     connectNetwork,
+    showControlCenter,
+    toggleControlCenter,
+    closeControlCenter,
+    bluetoothOn,
+    toggleBluetooth,
+    airdropState,
+    toggleAirdrop,
+    focusMode,
+    toggleFocus,
+    darkMode,
+    toggleDarkMode,
+    stageManagerOn,
+    toggleStageManager,
+    screenMirroringOn,
+    toggleScreenMirroring,
+    displayBrightness,
+    setDisplayBrightness,
+    soundVolume,
+    setSoundVolume,
+    isPlayingMusic,
+    togglePlayMusic,
+    currentTrackIndex,
   } = useNotificationStore();
   const [time, setTime] = useState(dayjs());
   const wifiBtnRef = useRef(null);
+  const controlCenterBtnRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -481,6 +1022,7 @@ const Navbar = ({ onOpenAbout, sleepMac, restartMac, shutMac, setLogin }) => {
           onClose={() => setShowAppleMenu(false)}
           openAboutMac={onOpenAbout}
           btnRef={appleBtnRef}
+          darkMode={darkMode}
         />
       )}
 
@@ -492,6 +1034,36 @@ const Navbar = ({ onOpenAbout, sleepMac, restartMac, shutMac, setLogin }) => {
           btnRef={wifiBtnRef}
           activeNetwork={activeNetwork}
           connectNetwork={connectNetwork}
+          darkMode={darkMode}
+        />
+      )}
+
+      {showControlCenter && (
+        <ControlCenter
+          wifiOn={wifiOn}
+          toggleWifi={toggleWifi}
+          activeNetwork={activeNetwork}
+          bluetoothOn={bluetoothOn}
+          toggleBluetooth={toggleBluetooth}
+          airdropState={airdropState}
+          toggleAirdrop={toggleAirdrop}
+          focusMode={focusMode}
+          toggleFocus={toggleFocus}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+          stageManagerOn={stageManagerOn}
+          toggleStageManager={toggleStageManager}
+          screenMirroringOn={screenMirroringOn}
+          toggleScreenMirroring={toggleScreenMirroring}
+          displayBrightness={displayBrightness}
+          setDisplayBrightness={setDisplayBrightness}
+          soundVolume={soundVolume}
+          setSoundVolume={setSoundVolume}
+          isPlayingMusic={isPlayingMusic}
+          togglePlayMusic={togglePlayMusic}
+          currentTrackIndex={currentTrackIndex}
+          onClose={closeControlCenter}
+          btnRef={controlCenterBtnRef}
         />
       )}
 
@@ -535,12 +1107,17 @@ const Navbar = ({ onOpenAbout, sleepMac, restartMac, shutMac, setLogin }) => {
             />
           </TopBarItem>
 
-          {/* Mode toggle */}
-          <TopBarItem className="px-1.5">
+          {/* Mode toggle / Control Center */}
+          <TopBarItem 
+            ref={controlCenterBtnRef}
+            forceHover={showControlCenter}
+            onClick={toggleControlCenter}
+            className="px-1.5"
+          >
             <img
               src="/icons/mode.svg"
               className="w-5 h-5 object-contain invert"
-              alt="Mode"
+              alt="Control Center"
             />
           </TopBarItem>
         </div>

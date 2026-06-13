@@ -1,0 +1,188 @@
+================================================================================
+MACOS PORTFOLIO & SPOTIFY REPLICA - ARCHITECTURE & TECHNICAL STUDY NOTES
+================================================================================
+
+This document details the architecture, design choices, state management, dependencies,
+and specific technical implementations of the macOS-style Portfolio website and
+integrated Spotify PC desktop client replica. It is formatted to serve as an 
+interview preparation sheet.
+
+--------------------------------------------------------------------------------
+1. CORE TECH STACK & SYSTEM DEPENDENCIES
+--------------------------------------------------------------------------------
+
+The project is built as a Single Page Application (SPA) utilizing Vite, React 19,
+and a modern animation/utility stack:
+
+* React 19 & React-DOM (v19.2): High-performance UI rendering with hooks.
+* Vite (v8.0): Next-generation front-end tooling/bundler offering lightning-fast HMR.
+* TailwindCSS v4: Used for streamlined, modern CSS utilities and unified spacing.
+* Zustand (v5.0): Lightweight, store-based state management that avoids prop-drilling
+  and minimizes component re-renders. Combined with Immer middleware for clean, 
+  mutable-style state updates.
+* GSAP (v3.15) & @gsap/react: Powering window drag-and-drop mechanics with high
+  FPS, sub-pixel positioning, and smooth inertia.
+* Framer Motion (v12.38): Smooth page-load, dock-hover, and dropdown animations.
+* Lucide React (v1.14): Clean, vector SVG icons matching macOS and Spotify aesthetics.
+* Dayjs: Minimalist library for parsing, validating, and formatting system clock times.
+* React PDF: Serving high-fidelity PDF documents in the Resume window.
+
+--------------------------------------------------------------------------------
+2. WINDOW ARCHITECTURE & THE HOC DESIGN PATTERN
+--------------------------------------------------------------------------------
+
+To support a multi-window macOS desktop desktop interface, the project utilizes 
+a Higher-Order Component (HOC) design pattern:
+
+* Wrapper HOC: windowWrapper.jsx
+  - Path: src/hoc/windowWrapper.jsx
+  - Purpose: Decorates standard React components (like Safari, Terminal, Spotify) 
+    with core OS behaviors (z-index focus layers, GSAP Draggability, opening transitions).
+  
+* Z-Index and Focus Control:
+  - Inside the HOC, `onMouseDown` and `onPress` events dispatch a `focusWindow(windowKey)`
+    action to the global `useWindowStore` (Zustand). This increments and applies 
+    increasing z-indexes to bring clicked windows to the foreground.
+
+* Trigger-Restricted Draggability:
+  - PROBLEM: Making the entire window container draggable intercepts pointer events on
+    window bodies. This prevents scrollbar dragging, text selection, and range inputs.
+  - SOLUTION: Restricting the GSAP Draggable trigger. The HOC queries the window layout
+    for a header class (#window-header, .window-header, .title-bar, or .drag-handle).
+    If found, only clicking and dragging the header moves the window. Body controls
+    (such as Spotify's sliders) remain fully interactive.
+  - KEY CODE:
+    ```javascript
+    const winContainer = el.firstElementChild;
+    const header = winContainer?.querySelector('#window-header, .window-header, .title-bar, .drag-handle')
+        || winContainer?.firstElementChild
+        || el;
+
+    const draggable = Draggable.create(el, {
+        trigger: header,
+        onPress: () => focusWindow(windowKey),
+    });
+    ```
+
+--------------------------------------------------------------------------------
+3. STATE MANAGEMENT SYSTEM (ZUSTAND + IMMER)
+--------------------------------------------------------------------------------
+
+Two core Zustand stores handle the application state, utilizing Immer for clean state
+mutations without boilerplate spread operators (`...state`):
+
+* Window Store (src/store/window.js):
+  - Manages window open/closed status, minimizations, and layered Z-indexes.
+  - Updates positioning coordinates on dragging.
+
+* Notification & Control Center Store (src/store/notification.js):
+  - Core system states: wifiOn, bluetoothOn, darkMode, displayBrightness, and soundVolume.
+  - Spotify Integration properties:
+    - isPlayingMusic (boolean): Shared playback state.
+    - currentTrackIndex (number): Index of the active track playing in Spotify.
+    - togglePlayMusic / setIsPlayingMusic: Playback toggling triggers.
+    - setCurrentTrackIndex: Triggers track changes.
+
+--------------------------------------------------------------------------------
+4. HIGH-FIDELITY SPOTIFY PC CLIENT IMPLEMENTATION
+--------------------------------------------------------------------------------
+
+* Component File: src/windows/Spotify.jsx
+* Tracks Definition: A structured array `TRACKS` containing track IDs, title strings, 
+  artists, local URLs (`/music/Best Friends.mp3`, etc.), online stream fallbacks,
+  cover images, and metadata.
+
+* Dynamic Audio Lifecycle:
+  - The HTML5 Audio element is created programmatically inside a `useEffect` on mount.
+  - A mutable ref `audioRef.current` holds the instance.
+  - Event listeners are attached to sync timestamps (`timeupdate`), loaded metadata 
+    (`loadedmetadata`), and auto-advancing on song end (`ended`).
+  - Refs are used for reactive variables (like `isRepeatRef`, `isPlayingRef`, and 
+    `trackIndexRef`) to avoid stale closure scopes inside the mount effect listener callbacks.
+
+* Preventing Playback Race Conditions:
+  - PROBLEM: When selecting a track, both `currentTrackIndex` and `isPlayingMusic`
+    update in parallel. Having separate effects for track loading and playing creates 
+    a race condition. The old track's play promise gets interrupted by the new track's 
+    src change, rejecting the promise. The rejection handler was resetting the playing
+    state back to false.
+  - SOLUTION: Unified combined sync effect. The effect checks if the current src pathname
+    matches the target track url. If not, it sets the new `src` and calls `audio.load()`.
+    Only then does it execute `audio.play()` based on `isPlayingMusic && isSpotifyOpen`.
+    Rejection errors (like play-request interruptions) are caught silently without 
+    reverting UI states to paused.
+  - KEY CODE:
+    ```javascript
+    useEffect(() => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      let needsUpdate = true;
+      if (audio.src) {
+        try {
+          const currentSrcPath = decodeURIComponent(new URL(audio.src).pathname);
+          const targetSrcPath = currentTrack.url;
+          if (currentSrcPath === targetSrcPath || audio.src.includes(currentTrack.fallbackUrl)) {
+            needsUpdate = false;
+          }
+        } catch (err) {
+          console.error("Error parsing audio src:", err);
+        }
+      }
+
+      if (needsUpdate) {
+        audio.src = currentTrack.url;
+        audio.load();
+      }
+
+      if (isPlayingMusic && isSpotifyOpen) {
+        audio.play().catch((err) => {
+          console.log("Audio playback request handled/delayed:", err);
+        });
+      } else {
+        audio.pause();
+      }
+    }, [currentTrackIndex, isPlayingMusic, isSpotifyOpen]);
+    ```
+
+* Local Media Fallbacks:
+  - If a local music file is missing on the client system, the `error` event listener
+    catches it, logs the warning, and gracefully swaps the audio source to the 
+    predefined online fallback stream (SoundHelix URLs), preserving playback continuity.
+
+* Heart Liking System (Spotify UI replication):
+  - Stored inside `likedTrackIds` React state.
+  - Heart buttons are rendered in the playlist table columns and footer player bar.
+  - Clicking a heart calls `toggleFavorite(trackId)`.
+  - The Home Page "Dhanush's Favorites" grid maps dynamically over:
+    `TRACKS.filter(t => likedTrackIds.includes(t.id))`
+  - The "Liked Songs" playlist view filters and shows only liked tracks.
+  - The "All Songs" playlist view (replacing the "Example" playlist) lists all tracks.
+
+* Relative Volume Logic:
+  - Bound to both Spotify's local volume control (`spotifyVolume`) and the macOS 
+    system sound volume slider (`soundVolume`).
+  - Audio output volume is computed as a product of both sliders relative to 100:
+    ```javascript
+    audio.volume = (spotifyVolume / 100) * (soundVolume / 100);
+    ```
+  - Allows the system sound volume to act as a master control, while Spotify's slider
+    controls local output relative to that master level.
+
+--------------------------------------------------------------------------------
+5. GLOBAL NAVBAR & MAC CONTROL CENTER INTEGRATION
+--------------------------------------------------------------------------------
+
+* Component File: src/components/Navbar.jsx
+* Integration mechanism:
+  - The global system `Navbar.jsx` imports `TRACKS` from `Spotify.jsx` and subscribes 
+    to `isPlayingMusic` and `currentTrackIndex` from `useNotificationStore`.
+  - The Control Center music widget renders the active track details dynamically:
+    * Replaces the static placeholder text ("Faded") with `currentTrack.title`.
+    * Replaces the static artist text ("Alan Walker") with `currentTrack.artist`.
+    * Replaces the static musical emoji with the actual track's `currentTrack.cover` art,
+      complete with fallback image loading.
+    * Toggling playback via the Control Center music button updates `isPlayingMusic` 
+      globally, instantly pausing/resuming Spotify's playback.
+
+================================================================================

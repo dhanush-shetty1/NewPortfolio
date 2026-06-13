@@ -1,7 +1,9 @@
 import React from "react";
 import { Sun, CloudSun, CloudRain, Wind } from "lucide-react";
+import useNotificationStore from "#store/notification";
 
 export default function WeatherWidget() {
+  const { darkMode } = useNotificationStore();
   // Mock weather data
   const weather = {
     city: "Mumbai",
@@ -28,20 +30,31 @@ export default function WeatherWidget() {
       case "rain":
         return <CloudRain size={size} style={{ color: "#00a2ff" }} />;
       default:
-        return <CloudSun size={size} style={{ color: "#cbd5e1" }} />;
+        return <CloudSun size={size} style={{ color: darkMode ? "#cbd5e1" : "#4b5563" }} />;
     }
   };
+
+  const widgetBg = darkMode
+    ? "linear-gradient(135deg, rgba(44, 122, 237, 0.45) 0%, rgba(28, 28, 30, 0.8) 100%)"
+    : "linear-gradient(135deg, rgba(135, 206, 250, 0.6) 0%, rgba(240, 240, 245, 0.85) 100%)";
+  const widgetBorder = darkMode ? "0.5px solid rgba(255,255,255,0.15)" : "0.5px solid rgba(0,0,0,0.12)";
+  const textColor = darkMode ? "white" : "#1c1c1e";
+  const subTextColor = darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)";
+  const infoRowBg = darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
+  const infoRowText = darkMode ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)";
+  const forecastBg = darkMode ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.5)";
+  const forecastTimeColor = darkMode ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)";
 
   return (
     <div
       style={{
-        background: "linear-gradient(135deg, rgba(44, 122, 237, 0.45) 0%, rgba(28, 28, 30, 0.8) 100%)",
+        background: widgetBg,
         backdropFilter: "blur(48px) saturate(190%)",
         WebkitBackdropFilter: "blur(48px) saturate(190%)",
-        border: "0.5px solid rgba(255,255,255,0.15)",
+        border: widgetBorder,
         borderRadius: 16,
         padding: "14px 16px",
-        color: "white",
+        color: textColor,
         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
     >
@@ -50,13 +63,13 @@ export default function WeatherWidget() {
         <div>
           <div style={{ fontSize: 15, fontWeight: 700 }}>{weather.city}</div>
           <div style={{ fontSize: 32, fontWeight: 300, margin: "2px 0 0 0", lineHeight: 1 }}>{weather.temp}</div>
-          <div style={{ fontSize: 11, color: "rgba(255,255,255,0.7)", fontWeight: 500, marginTop: 4 }}>
+          <div style={{ fontSize: 11, color: subTextColor, fontWeight: 500, marginTop: 4 }}>
             {weather.condition}
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
           {getIcon("rain", 38)}
-          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.6)", marginTop: 6, fontWeight: 500 }}>
+          <div style={{ fontSize: 10, color: subTextColor, marginTop: 6, fontWeight: 500 }}>
             H: {weather.high}  L: {weather.low}
           </div>
         </div>
@@ -67,16 +80,16 @@ export default function WeatherWidget() {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          background: "rgba(255,255,255,0.06)",
+          background: infoRowBg,
           borderRadius: 8,
           padding: "6px 10px",
           marginBottom: 10,
           fontSize: 10,
-          color: "rgba(255,255,255,0.8)",
+          color: infoRowText,
         }}
       >
         <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          <Wind size={10} style={{ color: "rgba(255,255,255,0.5)" }} />
+          <Wind size={10} style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.4)" }} />
           Wind: {weather.wind}
         </span>
         <span>Humidity: {weather.humidity}</span>
@@ -88,7 +101,7 @@ export default function WeatherWidget() {
           <div
             key={idx}
             style={{
-              background: "rgba(0,0,0,0.15)",
+              background: forecastBg,
               borderRadius: 8,
               padding: "6px 2px",
               display: "flex",
@@ -97,7 +110,7 @@ export default function WeatherWidget() {
               gap: 4,
             }}
           >
-            <span style={{ fontSize: 9, color: "rgba(255,255,255,0.5)", fontWeight: 600 }}>{item.time}</span>
+            <span style={{ fontSize: 9, color: forecastTimeColor, fontWeight: 600 }}>{item.time}</span>
             {getIcon(item.icon, 14)}
             <span style={{ fontSize: 10, fontWeight: 600 }}>{item.temp}</span>
           </div>

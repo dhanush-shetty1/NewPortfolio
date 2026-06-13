@@ -9,4 +9,6 @@ import Contact from "./Contact";
 import Photos from "./Photos";
 import Calculator from "./Calculator";
 import About from "./About";
-export { Terminal, Safari, Resume, Finder, Text, Image, Notes, Contact, Photos, Calculator, About };
+import Spotify from "./Spotify";
+
+export { Terminal, Safari, Resume, Finder, Text, Image, Notes, Contact, Photos, Calculator, About, Spotify };

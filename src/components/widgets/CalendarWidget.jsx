@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-react";
+import useNotificationStore from "#store/notification";
 
 export default function CalendarWidget() {
+  const { darkMode } = useNotificationStore();
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(today);
 
@@ -77,13 +79,13 @@ export default function CalendarWidget() {
   return (
     <div
       style={{
-        background: "rgba(28,28,30,0.75)",
+        background: darkMode ? "rgba(28,28,30,0.75)" : "rgba(240,240,245,0.78)",
         backdropFilter: "blur(48px) saturate(190%)",
         WebkitBackdropFilter: "blur(48px) saturate(190%)",
-        border: "0.5px solid rgba(255,255,255,0.13)",
+        border: darkMode ? "0.5px solid rgba(255,255,255,0.13)" : "0.5px solid rgba(0,0,0,0.12)",
         borderRadius: 16,
         padding: "14px 16px",
-        color: "white",
+        color: darkMode ? "white" : "#1c1c1e",
         fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       }}
     >
@@ -94,14 +96,14 @@ export default function CalendarWidget() {
           <span style={{ fontSize: 13, fontWeight: 600 }}>Calendar</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.8)" }}>
+          <span style={{ fontSize: 12, fontWeight: 500, color: darkMode ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)" }}>
             {monthNames[month]} {year}
           </span>
           <div style={{ display: "flex", gap: 4 }}>
             <button
               onClick={handlePrevMonth}
               style={{
-                background: "rgba(255,255,255,0.08)",
+                background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
                 border: "none",
                 borderRadius: 4,
                 width: 20,
@@ -110,7 +112,7 @@ export default function CalendarWidget() {
                 alignItems: "center",
                 justifyContent: "center",
                 cursor: "pointer",
-                color: "white",
+                color: darkMode ? "white" : "#1c1c1e",
               }}
             >
               <ChevronLeft size={12} />
@@ -118,7 +120,7 @@ export default function CalendarWidget() {
             <button
               onClick={handleNextMonth}
               style={{
-                background: "rgba(255,255,255,0.08)",
+                background: darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
                 border: "none",
                 borderRadius: 4,
                 width: 20,
@@ -127,7 +129,7 @@ export default function CalendarWidget() {
                 alignItems: "center",
                 justifyContent: "center",
                 cursor: "pointer",
-                color: "white",
+                color: darkMode ? "white" : "#1c1c1e",
               }}
             >
               <ChevronRight size={12} />
@@ -139,7 +141,7 @@ export default function CalendarWidget() {
       {/* Weekdays Row */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", textAlign: "center", marginBottom: 6 }}>
         {dayNames.map((day) => (
-          <span key={day} style={{ fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,0.3)" }}>
+          <span key={day} style={{ fontSize: 10, fontWeight: 600, color: darkMode ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.4)" }}>
             {day}
           </span>
         ))}
@@ -163,8 +165,8 @@ export default function CalendarWidget() {
                 color: currentIsToday
                   ? "white"
                   : slot.isCurrentMonth
-                  ? "white"
-                  : "rgba(255,255,255,0.2)",
+                  ? (darkMode ? "white" : "#1c1c1e")
+                  : (darkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.25)"),
                 background: currentIsToday ? "#ff453a" : "transparent",
               }}
             >
@@ -176,8 +178,8 @@ export default function CalendarWidget() {
 
       {/* Upcoming Events */}
       {month === today.getMonth() && year === today.getFullYear() && (
-        <div style={{ borderTop: "0.5px solid rgba(255,255,255,0.1)", paddingTop: 10 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", marginBottom: 6, letterSpacing: 0.5 }}>
+        <div style={{ borderTop: `0.5px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}`, paddingTop: 10 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)", textTransform: "uppercase", marginBottom: 6, letterSpacing: 0.5 }}>
             Upcoming Today
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -188,7 +190,8 @@ export default function CalendarWidget() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  background: "rgba(255,255,255,0.04)",
+                  background: darkMode ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+                  border: `0.5px solid ${darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}`,
                   padding: "5px 8px",
                   borderRadius: 6,
                   borderLeft: `3px solid ${
@@ -196,10 +199,10 @@ export default function CalendarWidget() {
                   }`,
                 }}
               >
-                <span style={{ fontSize: 11, color: "white", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginRight: 8 }}>
+                <span style={{ fontSize: 11, color: darkMode ? "white" : "#1c1c1e", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginRight: 8 }}>
                   {evt.title}
                 </span>
-                <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", flexShrink: 0 }}>
+                <span style={{ fontSize: 9, color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.5)", flexShrink: 0 }}>
                   {evt.time}
                 </span>
               </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import gsap from 'gsap';
 import { Boot, Login, Dock, Home, Navbar, Welcome, NotificationCenter } from "#components"
-import { Text, Image, Notes, Finder, Resume, Safari, Terminal, Contact, Photos, Calculator, About } from "#windows";
+import { Text, Image, Notes, Finder, Resume, Safari, Terminal, Contact, Photos, Calculator, About, Spotify } from "#windows";
 import Draggable from 'gsap/src/Draggable';
 import { motion, AnimatePresence } from 'framer-motion';
 import useWindowStore from '#store/window';
@@ -15,7 +15,7 @@ const App = () => {
   const [restart, setRestart] = useState(false);
   const [sleep, setSleep] = useState(false);
   const { openWindow } = useWindowStore();
-  const { showNotificationCenter, closeNotificationCenter } = useNotificationStore();
+  const { showNotificationCenter, closeNotificationCenter, displayBrightness } = useNotificationStore();
 
   const handleSetBooting = (val) => {
     setBooting(val);
@@ -48,9 +48,23 @@ const App = () => {
     <main
       className="w-dvw h-dvh overflow-hidden select-none"
       style={{
-        background: booting ? "black" : 'url("/images/wp.jpg") center/cover no-repeat'
+        background: booting 
+          ? "black" 
+          : 'url("/images/wp.jpg") center/cover no-repeat'
       }}
     >
+      {/* Screen Brightness Overlay */}
+      <div 
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "black",
+          opacity: (100 - displayBrightness) / 150,
+          pointerEvents: "none",
+          zIndex: 9999999,
+          transition: "opacity 0.05s ease-out",
+        }}
+      />
       <AnimatePresence mode="wait">
         {booting ? (
           <motion.div
@@ -108,6 +122,7 @@ const App = () => {
             <Photos />
             <Calculator />
             <About />
+            <Spotify />
             <Home />
           </motion.div>
         )}
