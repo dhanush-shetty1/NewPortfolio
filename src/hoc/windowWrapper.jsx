@@ -10,7 +10,7 @@ const windowWrapper = (Component, windowKey) => {
     const Wrapped = (props) => {
 
         const { focusWindow, windows } = useWindowStore()
-        const { isOpen, zIndex } = windows[windowKey]
+        const { isOpen, isMinimized, zIndex } = windows[windowKey]
 
         const ref = useRef(null)
 
@@ -41,7 +41,9 @@ const windowWrapper = (Component, windowKey) => {
             const el = ref.current
             if (!el) return
 
-            if (isOpen) {
+            const isVisible = isOpen && !isMinimized
+
+            if (isVisible) {
 
                 el.style.display = 'block'
 
@@ -76,7 +78,7 @@ const windowWrapper = (Component, windowKey) => {
 
             }
 
-        }, [isOpen])
+        }, [isOpen, isMinimized])
 
         return (
             <section

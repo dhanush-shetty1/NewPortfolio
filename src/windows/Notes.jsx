@@ -48,8 +48,8 @@ const INITIAL_NOTES = [
   },
   {
     id: "2",
-    title: "Learning Roadmap",
-    body: "- Advanced Three.js for 3D web graphics\n- Tailwind CSS v4 custom theme extensions\n- State management optimizations with Zustand",
+    title: "Interview Prep",
+    body: "- NODE.jS\n- Mongo\n- Express\n- Docker\n- Redux\n- JWT\n- Resume\n- One nice Project",
     date: "Yesterday",
     dateISO: "2026-06-12",
   },

@@ -3,7 +3,7 @@ import React from 'react'
 
 const WindowControlls = ({ target }) => {
 
-    const { closeWindow } = useWindowStore()
+    const { closeWindow, minimizeWindow } = useWindowStore()
 
     return (
         <div id="window-controls">
@@ -13,7 +13,10 @@ const WindowControlls = ({ target }) => {
                 onClick={() => closeWindow(target)}
             />
 
-            <div className='minimize' />
+            <div
+                className='minimize'
+                onClick={() => minimizeWindow(target)}
+            />
 
             <div className='maximize' />
 
