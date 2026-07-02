@@ -130,7 +130,6 @@ const techStack = [
     items: [
       "React.js",
       "Next.js",
-      "Redux Toolkit",
       "Tailwind CSS",
       "Bootstrap",
       "ShadCN",

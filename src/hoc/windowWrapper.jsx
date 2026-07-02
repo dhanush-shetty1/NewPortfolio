@@ -21,12 +21,14 @@ const windowWrapper = (Component, windowKey) => {
 
             // Dynamically locate the header or title bar to use as the drag trigger
             const winContainer = el.firstElementChild
-            const header = winContainer?.querySelector('#window-header, .window-header, .title-bar, .drag-handle')
+            const header = (winContainer?.matches('#window-header, .window-header, .title-bar, .drag-handle') ? winContainer : null)
+                || winContainer?.querySelector('#window-header, .window-header, .title-bar, .drag-handle')
                 || winContainer?.firstElementChild
                 || el
 
             const draggable = Draggable.create(el, {
                 trigger: header,
+                dragClickables: false,
                 onPress: () => focusWindow(windowKey),
             })
 

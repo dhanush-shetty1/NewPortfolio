@@ -10,15 +10,20 @@ const WindowControlls = ({ target }) => {
 
             <div
                 className='close'
+                data-clickable="true"
                 onClick={() => closeWindow(target)}
             />
 
             <div
                 className='minimize'
+                data-clickable="true"
                 onClick={() => minimizeWindow(target)}
             />
 
-            <div className='maximize' />
+            <div 
+                className='maximize'
+                data-clickable="true"
+            />
 
         </div>
     )
