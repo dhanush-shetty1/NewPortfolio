@@ -102,7 +102,7 @@ I am a Full Stack Developer specializing in high-fidelity React interfaces, GSAP
       case "contact":
         newHistory.push({
           text: `Contact Info:
-  Email:    dhanush@example.com
+  Email:    dhanushshetty1217@gmail.com
   GitHub:   github.com/dhanush-shetty1
   LinkedIn: linkedin.com/in/dhanush-shetty`,
           type: "output",
