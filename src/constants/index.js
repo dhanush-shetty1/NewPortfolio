@@ -565,7 +565,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-48",
-      windowPosition: "top-[21vh] left-5",
+      windowPosition: "top-[16vh] left-5",
       children: [
         {
           id: 1,
@@ -617,7 +617,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-80",
-      windowPosition: "top-[36vh] left-5",
+      windowPosition: "top-[26vh] left-5",
       children: [
         {
           id: 1,
@@ -669,7 +669,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 right-5",
-      windowPosition: "top-[51vh] left-4",
+      windowPosition: "top-[36vh] left-3",
       children: [
         {
           id: 1,
@@ -710,6 +710,56 @@ const WORK_LOCATION = {
           kind: "file",
           fileType: "fig",
           href: "https://github.com/dhanush-shetty1/Portfolio",
+          position: "top-60 right-20",
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: "LocoVanta",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-26 right-5",
+      windowPosition: "top-[46vh] left-5",
+      children: [
+        {
+          id: 1,
+          name: "README.md",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-5 left-10",
+          description: [
+            "LocoVanta is a premium real-time railway journey companion designed to make live train tracking more visual, intuitive, and immersive.",
+            "By combining live train data with interactive maps, journey analytics, station timelines, and contextual weather information, LocoVanta turns complex railway data into a simple journey experience.",
+            "The platform uses RailRadar, MapTiler, MapLibre, OpenWeather, Turf.js, and OpenStreetMap data to deliver real-time tracking, route visualization, and meaningful travel insights.",
+          ],
+        },
+        {
+          id: 2,
+          name: "Link",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://loco-vanta.vercel.app/",
+          position: "top-10 right-20",
+        },
+        {
+          id: 3,
+          name: "Showcase.png",
+          icon: "/images/image.png",
+          kind: "file",
+          fileType: "img",
+          position: "top-52 right-80",
+          imageUrl: "/images/LocoVanta.png",
+        },
+        {
+          id: 4,
+          name: "Github",
+          icon: "/images/github.png",
+          kind: "file",
+          fileType: "fig",
+          href: "https://github.com/dhanush-shetty1/LocoVanta",
           position: "top-60 right-20",
         },
       ],
