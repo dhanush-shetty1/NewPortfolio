@@ -565,7 +565,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-48",
-      windowPosition: "top-[16vh] left-5",
+      windowPosition: "top-[18vh] left-5",
       children: [
         {
           id: 1,
@@ -617,7 +617,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 left-80",
-      windowPosition: "top-[26vh] left-5",
+      windowPosition: "top-[30vh] left-5",
       children: [
         {
           id: 1,
@@ -669,7 +669,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-16 right-5",
-      windowPosition: "top-[36vh] left-3",
+      windowPosition: "top-[42vh] left-3",
       children: [
         {
           id: 1,
@@ -720,7 +720,7 @@ const WORK_LOCATION = {
       icon: "/images/folder.png",
       kind: "folder",
       position: "top-26 right-5",
-      windowPosition: "top-[46vh] left-5",
+      windowPosition: "top-[54vh] left-5",
       children: [
         {
           id: 1,
